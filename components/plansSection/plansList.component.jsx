@@ -1,12 +1,12 @@
 import PlanItem from "./planItem.component";
 export default function PlansList() {
 	return (
-		<div className=''>
+		<div className='md:flex md:justify-between md:gap-10 md:w-full md:mb-20'>
 			<PlanItem
 				img={"/image-category11.png"}
 				title={"Basic Crossfit"}
 				description={
-					"Our staff includes amazing professionals that have an eye for crossfit."
+					"Our staff includes amazing professionals that have an eye for crossfit and  will train you with passion."
 				}
 			/>
 			<PlanItem

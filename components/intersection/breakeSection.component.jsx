@@ -1,7 +1,6 @@
 export default function BreakSection({ img, smText, bgText }) {
 	return (
-		<div
-			className={`bg-[url('/${img}')] bg-cover relative bg-center text-center pt-10`}>
+		<div className={`${img} bg-cover relative bg-center text-center pt-10`}>
 			<div className='absolute top-0 left-0 w-full h-full bg-black/50 z-0'></div>
 			<p className='uppercase relative text-white '>{smText}</p>
 			<h3 className='uppercase font-bold text-2xl relative text-white'>

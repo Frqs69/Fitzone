@@ -9,6 +9,7 @@ import FooterSection from "@/components/footer/footerSection.component";
 import BreakSection from "@/components/intersection/breakeSection.component";
 
 import { Inter } from "next/font/google";
+import DesktopNav from "@/components/nav/desktopNav.component";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -17,14 +18,16 @@ export default function Home() {
 			<div className="bg-[url('/headerImg.png')] bg-cover relative bg-center">
 				<div className='absolute top-0 left-0 w-full h-full bg-black/40 '></div>
 				<MobileNav />
+				<DesktopNav />
 				<Header />
 			</div>
 			<WelcomeSection />
 			<PlansSection />
+
 			<BreakSection
 				smText={"We trained with"}
 				bgText={"Personal trainer"}
-				img={"interSectionImage.png"}
+				img={"bg-[url('/interSectionImage.png')]"}
 			/>
 
 			<TrainersSection />
@@ -32,7 +35,7 @@ export default function Home() {
 			<BreakSection
 				smText={"Call us"}
 				bgText={"957 547 454"}
-				img={"interSectionImage2.png"}
+				img={"bg-[url('/interSectionImage2.png')]"}
 			/>
 
 			<FooterSection />

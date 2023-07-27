@@ -10,7 +10,7 @@ export default function MobileNav() {
 	};
 
 	return (
-		<nav className='relative flex justify-between py-6 px-6 items-center'>
+		<nav className='relative flex justify-between py-6 px-6 items-center md:hidden'>
 			<p className='uppercase font-bold text-2xl text-white'>
 				Fit<span className='text-orange-400'>zone</span>
 			</p>
