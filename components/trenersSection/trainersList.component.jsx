@@ -1,7 +1,7 @@
 import TrainersItem from "./trainersItem.component";
 export default function TrainersList() {
 	return (
-		<div>
+		<div className='md:flex md:justify-between md:gap-10 md:w-full md:mb-10'>
 			<TrainersItem
 				img={"image-trainer.png"}
 				name={"Sarra Miller"}

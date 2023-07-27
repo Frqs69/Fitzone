@@ -6,7 +6,7 @@ export default function PlansList() {
 				img={"/image-category11.png"}
 				title={"Basic Crossfit"}
 				description={
-					"Our staff includes amazing professionals that have an eye for crossfit and  will train you with passion."
+					"Our staff includes amazing professionals that have an eye for crossfit and  will train you."
 				}
 			/>
 			<PlanItem
