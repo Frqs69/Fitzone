@@ -1,5 +1,6 @@
 import Header from "@/components/header/header.component";
 import MobileNav from "@/components/nav/mobileNav.component";
+import PlansSection from "@/components/plansSection/plansSection.component";
 import WelcomeSection from "@/components/welcomeSection/welcomeSection.component";
 import { Inter } from "next/font/google";
 
@@ -14,6 +15,7 @@ export default function Home() {
 				<Header />
 			</div>
 			<WelcomeSection />
+			<PlansSection />
 		</>
 	);
 }
