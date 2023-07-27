@@ -9,10 +9,10 @@ export default function HeaderForm() {
 			<form action='' className=''>
 				<div className='w-full grid grid-cols-2 gap-4'>
 					<select className='bg-white border-black/50 border-b px-1 py-2'>
-						<option value=''>1</option>
-						<option value=''>2</option>
-						<option value=''>3</option>
-						<option value=''>4</option>
+						<option value=''>1 person</option>
+						<option value=''>2 persons</option>
+						<option value=''>3 persons</option>
+						<option value=''>4 persons</option>
 					</select>
 					<input type='date' className='border-black/50  border-b px-1 py-2' />
 					<input type='time' className='border-black/50  border-b px-1 py-2' />

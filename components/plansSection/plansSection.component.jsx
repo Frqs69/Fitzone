@@ -2,7 +2,7 @@ import PlansList from "./plansList.component";
 
 export default function PlansSection() {
 	return (
-		<section className='px-4'>
+		<section className='px-4' id='plans'>
 			<h2 className='font-bold text-3xl my-6'>
 				Welcome to <span className='text-orange-400'>Fitzone</span>
 			</h2>

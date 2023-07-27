@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 export default function FooterSection() {
 	return (
-		<footer className='bg-black p-10'>
+		<footer className='bg-black p-10' id='contact'>
 			<h2 className='uppercase font-bold text-2xl text-white mb-6'>
 				Fit<span className='text-orange-400'>zone</span>
 			</h2>

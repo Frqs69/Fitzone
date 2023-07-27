@@ -1,7 +1,7 @@
 import TrainersList from "./trainersList.component";
 export default function TrainersSection() {
 	return (
-		<section className='px-4'>
+		<section className='px-4' id='trainers'>
 			<h2 className='font-bold text-3xl my-6'>
 				Expert <span className='text-orange-400'>Trainers</span>
 			</h2>

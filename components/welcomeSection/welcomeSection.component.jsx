@@ -1,6 +1,6 @@
 export default function WelcomeSection() {
 	return (
-		<section className='bg-green-200 pt-56 px-4'>
+		<section className='bg-green-200 pt-56 px-4' id='about'>
 			<img src='sectionWelcome.png' alt='' />
 			<div>
 				<h2 className='font-bold text-3xl my-6'>
