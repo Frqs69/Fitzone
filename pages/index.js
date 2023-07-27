@@ -3,11 +3,12 @@ import Header from "@/components/header/header.component";
 import MobileNav from "@/components/nav/mobileNav.component";
 import PlansSection from "@/components/plansSection/plansSection.component";
 import WelcomeSection from "@/components/welcomeSection/welcomeSection.component";
-import InterSection from "@/components/intersection/interSection.component";
 import TrainersSection from "@/components/trenersSection/trainersSection.component";
-import { Inter } from "next/font/google";
 import FooterSection from "@/components/footer/footerSection.component";
 
+import BreakSection from "@/components/intersection/breakeSection.component";
+
+import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -20,17 +21,20 @@ export default function Home() {
 			</div>
 			<WelcomeSection />
 			<PlansSection />
-			<InterSection
+			<BreakSection
 				smText={"We trained with"}
 				bgText={"Personal trainer"}
 				img={"interSectionImage.png"}
 			/>
+
 			<TrainersSection />
-			<InterSection
+
+			<BreakSection
 				smText={"Call us"}
 				bgText={"957 547 454"}
 				img={"interSectionImage2.png"}
 			/>
+
 			<FooterSection />
 		</>
 	);

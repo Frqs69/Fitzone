@@ -1,4 +1,4 @@
-export default function InterSection({ img, smText, bgText }) {
+export default function BreakSection({ img, smText, bgText }) {
 	return (
 		<div
 			className={`bg-[url('/${img}')] bg-cover relative bg-center text-center pt-10`}>

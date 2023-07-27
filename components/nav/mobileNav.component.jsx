@@ -21,8 +21,8 @@ export default function MobileNav() {
 				onClick={handleActive}
 			/>
 			<div
-				className={`fixed top-0 left-0 w-screen h-screen bg-white translate-x-${
-					isActive ? 0 : "full"
+				className={`fixed top-0 left-0 w-screen h-screen bg-white ${
+					isActive ? "translate-x-0" : "translate-x-full"
 				} transition-transform duration-300 z-10   text-2xl gap-10 text-right flex flex-col justify-center items-center `}>
 				<Icon
 					icon='material-symbols:close'
