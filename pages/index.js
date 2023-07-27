@@ -1,4 +1,5 @@
 import Header from "@/components/header/header.component";
+import InterSection from "@/components/intersection/intersection.component";
 import MobileNav from "@/components/nav/mobileNav.component";
 import PlansSection from "@/components/plansSection/plansSection.component";
 import WelcomeSection from "@/components/welcomeSection/welcomeSection.component";
@@ -16,6 +17,7 @@ export default function Home() {
 			</div>
 			<WelcomeSection />
 			<PlansSection />
+			<InterSection />
 		</>
 	);
 }
