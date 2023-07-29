@@ -35,10 +35,6 @@ export default function MobileNav() {
 					Home
 				</a>
 
-				<a href='#about' onClick={handleActive}>
-					About us
-				</a>
-
 				<a href='#plans' onClick={handleActive}>
 					Plans
 				</a>
@@ -53,11 +49,13 @@ export default function MobileNav() {
 
 				<div className='mt-10'>
 					<Link
-						href='#'
+						href='/auth/login'
 						className='bg-orange-400  text-white font-bold py-2 px-4 uppercase  '>
 						Login
 					</Link>
-					<Link href='#' className='border border-orange-400 py-2 px-4 ml-4'>
+					<Link
+						href='/auth/signup'
+						className='border border-orange-400 py-2 px-4 ml-4'>
 						Sign up
 					</Link>
 				</div>

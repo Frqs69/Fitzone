@@ -55,18 +55,18 @@ export default function FooterSection() {
 				<div className='hidden md:block text-white/70 md:w-4/12'>
 					<h3 className='text-xl mb-8'>Blogs</h3>
 					<div className='flex flex-col gap-8'>
-						<div className='flex items-center gap-6'>
+						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs1.png' alt='' />
 							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-						</div>
-						<div className='flex items-center gap-6'>
+						</a>
+						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs2.png' alt='' />
 							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-						</div>
-						<div className='flex items-center gap-6'>
+						</a>
+						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs3.png' alt='' />
 							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div className='hidden md:block text-white/70 '>

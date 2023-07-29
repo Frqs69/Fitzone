@@ -12,25 +12,25 @@ export default function DesktopNav() {
 						<a href='#'>Home</a>
 					</li>
 					<li>
-						<a href='#'>About us</a>
+						<a href='#plans'>Plans</a>
 					</li>
 					<li>
-						<a href='#'>Plans</a>
+						<a href='#trainers'>Trainers</a>
 					</li>
 					<li>
-						<a href='#'>Contact</a>
+						<a href='#contact'>Contact</a>
 					</li>
 				</ul>
 			</div>
 
 			<div>
 				<Link
-					href='#'
+					href='/auth/login'
 					className='text-white text-xl font-bold py-2 px-4 uppercase '>
 					Login
 				</Link>
 				<Link
-					href='#'
+					href='/auth/signup'
 					className='bg-orange-400 text-white text-xl font-bold py-2 px-4 uppercase '>
 					Sign up
 				</Link>
