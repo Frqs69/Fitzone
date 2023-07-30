@@ -6,7 +6,6 @@ const upperBodyExercises = [
 		name: "Wyciskanie sztangi leżąc",
 		weightType: "Weight",
 		weight: [60, 60, 60],
-		tiles: [],
 		reps: [10, 10, 10],
 	},
 	{
@@ -46,6 +45,103 @@ const upperBodyExercises = [
 	},
 ];
 
+const lowerBodyExercises = [
+	{
+		id: 1,
+		name: "Siady ze sztangą",
+		weightType: "Weight",
+		weight: [40, 40, 50],
+		reps: [10, 10, 10],
+	},
+	{
+		id: 2,
+		name: "Przysiad kolarski",
+		weightType: "Weight",
+		weight: [8, 8, 10],
+		reps: [10, 10, 10],
+	},
+	{
+		id: 3,
+		name: "Wyciskanie suwnicy leżąc",
+		weightType: "Weight",
+		weight: [80, 80, 85],
+		reps: [10, 10, 10],
+	},
+	{
+		id: 4,
+		name: "Uginanie nóg na piłce leżąc",
+		weightType: "-",
+		weight: [],
+		reps: [7, 8, 9],
+	},
+	{
+		id: 5,
+		name: "Wznosy nóg leżąc",
+		weightType: "-",
+		weight: [],
+		reps: [8, 9, 10],
+	},
+	{
+		id: 6,
+		name: "Allahy",
+		weightType: "Tiles",
+		weight: [5, 5, 6],
+		reps: [12, 12, 12],
+	},
+];
+
+const fullBodyExercises = [
+	{
+		id: 1,
+		name: "Opuszczanie na drążku",
+		weightType: "-",
+		weight: [],
+		reps: [5, 5, 6],
+	},
+	{
+		id: 2,
+		name: "Opuszczanie na poręczach (dipy)",
+		weightType: "-",
+		weight: [],
+		reps: [5, 5, 6],
+	},
+	{
+		id: 3,
+		name: "Wspięcia na palce na suwnicy",
+		weightType: "Weight",
+		weight: [35, 40, 40],
+		reps: [10, 10, 10],
+	},
+	{
+		id: 4,
+		name: "Wyciskanie francuskie hantli",
+		weightType: "Weight",
+		weight: [8, 8, 8],
+		reps: [9, 10, 11],
+	},
+	{
+		id: 5,
+		name: "Uginanie hantli stojąc z rotacją do zewnąrz",
+		weightType: "Weight",
+		weight: [8, 10, 10],
+		reps: [10, 10, 10],
+	},
+	{
+		id: 6,
+		name: "Prostowanie ramion na wyciągu",
+		weightType: "Tiles",
+		weight: [5, 5, 5],
+		reps: [10, 10, 11],
+	},
+	{
+		id: 7,
+		name: "Uginanie mlotkowe na wyciągu",
+		weightType: "Tiles",
+		weight: [5, 5, 5],
+		reps: [10, 10, 10],
+	},
+];
+
 export default function YourTraining() {
 	return (
 		<section className='p-4'>
@@ -59,7 +155,7 @@ export default function YourTraining() {
 							name={item.name}
 							weightType={item.weightType}
 							weight={item.weight}
-							reps={[10, 10, 10]}
+							reps={item.reps}
 						/>
 					))}
 				</div>
@@ -72,121 +168,15 @@ export default function YourTraining() {
 			<div>
 				<h3 className='text-xl font-bold mb-8'>Wednesday - LowerBody</h3>
 				<div>
-					<div className='border p-4 mb-8  '>
-						<div className='flex justify-between mb-2'>
-							<p className='text-xl'>Exercise 1</p>
-							<button className='text-xl text-orange-400 font-bold'>
-								Edit
-							</button>
-						</div>
-						<p className='text-lg mb-4 font-bold'>Siady ze sztangą</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>40kg</p>
-								<p>50kg</p>
-								<p>50kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 2</p>
-						<p className='text-lg mb-4 font-bold'>Przysiad kolarski</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>8kg</p>
-								<p>10kg</p>
-								<p>10kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 3</p>
-						<p className='text-lg mb-4 font-bold'>Wyciskanie suwnicy leżąc</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>80kg</p>
-								<p>80kg</p>
-								<p>85kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 4</p>
-						<p className='text-lg mb-4 font-bold'>
-							Uginanie nóg na piłce leżąc
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>7</p>
-								<p>8</p>
-								<p>9</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 5</p>
-						<p className='text-lg mb-4 font-bold'>Wznosy nóg leżąc</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>8</p>
-								<p>9</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 6</p>
-						<p className='text-lg mb-4 font-bold'>Allahy</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Tiles</p>
-								<p>5</p>
-								<p>5</p>
-								<p>6</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>12</p>
-								<p>12</p>
-								<p>12</p>
-							</div>
-						</div>
-					</div>
+					{lowerBodyExercises.map((item) => (
+						<YourTrainingExercise
+							id={item.id}
+							name={item.name}
+							weightType={item.weightType}
+							weight={item.weight}
+							reps={item.reps}
+						/>
+					))}
 				</div>
 				<div className='text-center'>
 					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'>
@@ -197,149 +187,15 @@ export default function YourTraining() {
 			<div>
 				<h3 className='text-xl font-bold mb-8'>Friday - FullBody</h3>
 				<div>
-					<div className='border p-4 mb-8  '>
-						<div className='flex justify-between mb-2'>
-							<p className='text-xl'>Exercise 1</p>
-							<button className='text-xl text-orange-400 font-bold'>
-								Edit
-							</button>
-						</div>
-						<p className='text-lg mb-4 font-bold'>Opuszczanie na drążku</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>5</p>
-								<p>5</p>
-								<p>6</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 2</p>
-						<p className='text-lg mb-4 font-bold'>
-							Opuszczanie na poręczach (dipy)
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-								<p>-</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>5</p>
-								<p>5</p>
-								<p>6</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 3</p>
-						<p className='text-lg mb-4 font-bold'>
-							Wspięcia na palce na suwnicy
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>35kg</p>
-								<p>40kg</p>
-								<p>40kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 4</p>
-						<p className='text-lg mb-4 font-bold'>
-							Wyciskanie francuskie hantli
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>8kg</p>
-								<p>8kg</p>
-								<p>8kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>9</p>
-								<p>10</p>
-								<p>11</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 5</p>
-						<p className='text-lg mb-4 font-bold'>
-							Uginanie hantli stojąc z rotacją do zewnąrz
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Weight</p>
-								<p>8kg</p>
-								<p>10kg</p>
-								<p>10kg</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 6</p>
-						<p className='text-lg mb-4 font-bold'>
-							Prostowanie ramion na wyciągu
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Tiles</p>
-								<p>5</p>
-								<p>5</p>
-								<p>5</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>11</p>
-							</div>
-						</div>
-					</div>
-					<div className='border p-4 mb-8'>
-						<p className='text-xl mb-2'>Exercise 7</p>
-						<p className='text-lg mb-4 font-bold'>
-							Uginanie mlotkowe na wyciągu
-						</p>
-						<div>
-							<div className='grid grid-cols-4 mb-4'>
-								<p>Tiles</p>
-								<p>5</p>
-								<p>5</p>
-								<p>5</p>
-							</div>
-							<div className='grid grid-cols-4'>
-								<p>Reps</p>
-								<p>10</p>
-								<p>10</p>
-								<p>10</p>
-							</div>
-						</div>
-					</div>
+					{fullBodyExercises.map((item) => (
+						<YourTrainingExercise
+							id={item.id}
+							name={item.name}
+							weightType={item.weightType}
+							weight={item.weight}
+							reps={item.reps}
+						/>
+					))}
 				</div>
 				<div className='text-center'>
 					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'>

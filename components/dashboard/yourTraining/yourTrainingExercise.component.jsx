@@ -3,7 +3,6 @@ export default function YourTrainingExercise({
 	name,
 	weightType,
 	weight,
-	tiles,
 	reps,
 }) {
 	const createWeight = () => {
@@ -28,7 +27,7 @@ export default function YourTrainingExercise({
 
 	return (
 		<div className='border p-4 mb-8  '>
-			<div className='flex justify-between mb-2'>
+			<div className='flex justify-between mb-6 mt-2'>
 				<p className='text-xl'>{`Exercise ${id}`}</p>
 				<button className='text-xl text-orange-400 font-bold'>Edit</button>
 			</div>
