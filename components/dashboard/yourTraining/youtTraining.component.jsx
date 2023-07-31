@@ -151,6 +151,7 @@ export default function YourTraining() {
 				<div>
 					{upperBodyExercises.map((item) => (
 						<YourTrainingExercise
+							key={item.id}
 							id={item.id}
 							name={item.name}
 							weightType={item.weightType}

@@ -1,5 +1,34 @@
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useState, useRef } from "react";
+// import { getServerSession } from "next-auth";
+// import { authOptions } from "../api/auth/[...nextauth]";
+
 export default function LoginPage() {
+	const emailRef = useRef();
+	const passwordRef = useRef();
+	const router = useRouter();
+
+	const submitHandler = async (e) => {
+		e.preventDefault();
+
+		const enteredEmail = emailRef.current.value;
+		const enteredPassword = passwordRef.current.value;
+
+		const result = await signIn("credentials", {
+			redirect: false,
+			email: enteredEmail,
+			password: enteredPassword,
+		});
+
+		if (!result.error) {
+			router.replace("/dashboard/yourTraining");
+		}
+
+		console.log(result.error);
+	};
+
 	return (
 		<div className="bg-[url('/headerImg.png')] bg-cover relative bg-center h-screen">
 			<div className='absolute top-0 left-0 w-full h-full bg-black/40 '></div>
@@ -11,23 +40,24 @@ export default function LoginPage() {
 							Fit<span className='text-orange-400'>zone</span>
 						</Link>
 					</div>
-					<form>
+					<form onSubmit={submitHandler}>
 						<div className='flex flex-col'>
 							<label
-								htmlFor='login'
+								htmlFor='email'
 								className='font-bold text-lg mb-2 md:text-2xl md:mb-4'>
 								Email
 							</label>
 							<input
 								type='email'
-								id='login'
+								id='email'
 								className='border text-lg py-1 px-2'
 								required
+								ref={emailRef}
 							/>
 						</div>
 						<div className='flex flex-col my-4'>
 							<label
-								htmlFor='login'
+								htmlFor='password'
 								className='font-bold text-lg my-2 md:text-2xl md:mb-4'>
 								Password
 							</label>
@@ -36,6 +66,7 @@ export default function LoginPage() {
 								id='password'
 								className='border text-lg py-1 px-2'
 								required
+								ref={passwordRef}
 							/>
 						</div>
 						<div className='flex flex-col gap-4'>
@@ -66,3 +97,29 @@ export default function LoginPage() {
 		</div>
 	);
 }
+
+//! Uncomment on end of project for prevent not logged users to view this page
+// export async function getServerSideProps(context) {
+// 	const session = await getServerSession(context.req, context.res, authOptions);
+
+// 	console.log(session);
+
+// 	if (!session) {
+// 		return {
+// 			props: {
+// 				message: "no session",
+// 			},
+// 		};
+// 	}
+
+// 	session.user.image = null;
+// 	return {
+// 		redirect: {
+// 			destination: `/dashboard/yourTraining`,
+// 			permanent: false,
+// 		},
+// 		props: {
+// 			session,
+// 		},
+// 	};
+// }

@@ -8,10 +8,10 @@ export default function YourTrainingExercise({
 	const createWeight = () => {
 		let weights = [];
 		if (weightType === "Weight") {
-			weights = weight.map((item) => <p>{`${item}kg`}</p>);
+			weights = weight.map((item) => <p key={item.id}>{`${item}kg`}</p>);
 		}
 		if (weightType === "Tiles") {
-			weights = weight.map((item) => <p>{item}</p>);
+			weights = weight.map((item) => <p key={item.id}>{item}</p>);
 		}
 		if (weightType === "-") {
 			for (let i = 0; i < 3; i++) {
@@ -22,7 +22,7 @@ export default function YourTrainingExercise({
 	};
 
 	const createReps = () => {
-		return reps.map((item) => <p>{item}</p>);
+		return reps.map((item) => <p key={item.id}>{item}</p>);
 	};
 
 	return (
