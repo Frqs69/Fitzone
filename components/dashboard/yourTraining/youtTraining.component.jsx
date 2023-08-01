@@ -1,3 +1,4 @@
+import { useState } from "react";
 import YourTrainingExercise from "./yourTrainingExercise.component";
 
 const upperBodyExercises = [
@@ -143,13 +144,53 @@ const fullBodyExercises = [
 ];
 
 export default function YourTraining() {
+	const [upperBody, setUpperBody] = useState(upperBodyExercises);
+	const [lowerBody, setLowerBody] = useState(lowerBodyExercises);
+	const [fullBody, setFullBody] = useState(fullBodyExercises);
+
+	const handleSaveUpperBody = (id, newReps, newWeight) => {
+		const updatedData = upperBody.map((item) => {
+			if (item.id === id) {
+				return { ...item, reps: newReps, weight: newWeight };
+			} else {
+				return item;
+			}
+		});
+
+		setUpperBody(updatedData);
+	};
+
+	const handleSaveFullBody = (id, newReps) => {
+		const updatedData = fullBody.map((item) => {
+			if (item.id === id) {
+				return { ...item, reps: newReps, weight: newWeight };
+			} else {
+				return item;
+			}
+		});
+
+		setFullBody(updatedData);
+	};
+
+	const handleSaveLowerBody = (id, newReps) => {
+		const updatedData = lowerBody.map((item) => {
+			if (item.id === id) {
+				return { ...item, reps: newReps, weight: newWeight };
+			} else {
+				return item;
+			}
+		});
+
+		setLowerBody(updatedData);
+	};
+
 	return (
 		<section className='p-4'>
 			<h2 className='text-3xl font-bold mb-4'>Your Training</h2>
 			<div className='mb-10'>
 				<h3 className='text-xl font-bold mb-8'>Monday - UpperBody</h3>
 				<div>
-					{upperBodyExercises.map((item) => (
+					{upperBody.map((item) => (
 						<YourTrainingExercise
 							key={item.id}
 							id={item.id}
@@ -157,6 +198,7 @@ export default function YourTraining() {
 							weightType={item.weightType}
 							weight={item.weight}
 							reps={item.reps}
+							handleSaveData={handleSaveUpperBody}
 						/>
 					))}
 				</div>
@@ -169,13 +211,14 @@ export default function YourTraining() {
 			<div>
 				<h3 className='text-xl font-bold mb-8'>Wednesday - LowerBody</h3>
 				<div>
-					{lowerBodyExercises.map((item) => (
+					{lowerBody.map((item) => (
 						<YourTrainingExercise
 							id={item.id}
 							name={item.name}
 							weightType={item.weightType}
 							weight={item.weight}
 							reps={item.reps}
+							handleSaveData={handleSaveLowerBody}
 						/>
 					))}
 				</div>
@@ -188,13 +231,14 @@ export default function YourTraining() {
 			<div>
 				<h3 className='text-xl font-bold mb-8'>Friday - FullBody</h3>
 				<div>
-					{fullBodyExercises.map((item) => (
+					{fullBody.map((item) => (
 						<YourTrainingExercise
 							id={item.id}
 							name={item.name}
 							weightType={item.weightType}
 							weight={item.weight}
 							reps={item.reps}
+							handleSaveData={handleSaveFullBody}
 						/>
 					))}
 				</div>
