@@ -1,7 +1,6 @@
 import { useState } from "react";
 import YourTrainingExercise from "./yourTrainingExercise.component";
 
-
 const upperBodyExercises = [
 	{
 		id: 1,
@@ -144,13 +143,20 @@ const fullBodyExercises = [
 	},
 ];
 
-export default function YourTraining() {
-	
-	const [upperBody, setUpperBody] = useState(upperBodyExercises);
+export default function YourTraining({ user }) {
+	// console.log("user from your training", user.upperBodyExercises);
+	// console.log(upperBodyExercises);
+	if (!user) {
+		return <p>Loading...</p>;
+	}
+
+	const [upperBody, setUpperBody] = useState(user.upperBodyExercises);
 	const [lowerBody, setLowerBody] = useState(lowerBodyExercises);
 	const [fullBody, setFullBody] = useState(fullBodyExercises);
 
-	const handleSaveUpperBody = (id, newReps, newWeight) => {
+	console.log(user);
+
+	const handleSaveUpperBody = async (id, newReps, newWeight) => {
 		const updatedData = upperBody.map((item) => {
 			if (item.id === id) {
 				return { ...item, reps: newReps, weight: newWeight };
@@ -160,6 +166,15 @@ export default function YourTraining() {
 		});
 
 		setUpperBody(updatedData);
+
+		const data = await fetch("/api/updateExercise", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userExercises: updatedData,
+				email: user.email,
+			}),
+		});
 	};
 
 	const handleSaveFullBody = (id, newReps) => {

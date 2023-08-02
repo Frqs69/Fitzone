@@ -43,7 +43,7 @@ export default function YourTrainingPage() {
 		<>
 			<DashboardDesktopNav />
 			<DashboardMobileNav />
-			<YourTraining />
+			<YourTraining user={user}/>
 		</>
 	);
 }
