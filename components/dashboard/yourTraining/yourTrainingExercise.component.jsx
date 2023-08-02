@@ -9,7 +9,6 @@ export default function YourTrainingExercise({
 	handleSaveData,
 }) {
 	const [activeEditing, setActiveEditing] = useState(false);
-	const [newReps, setNewReps] = useState([]);
 	const repOneRef = useRef();
 	const repTwoRef = useRef();
 	const repThreeRef = useRef();
