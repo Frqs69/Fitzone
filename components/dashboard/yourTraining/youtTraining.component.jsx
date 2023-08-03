@@ -1,5 +1,6 @@
 import { useState } from "react";
 import YourTrainingExercise from "./yourTrainingExercise.component";
+import YourTrainingAddExercise from "./yourTrainingAddExercise.component";
 
 const upperBodyExercises = [
 	{
@@ -292,13 +293,16 @@ export default function YourTraining({ user }) {
 		return <p>Loading...</p>;
 	}
 
+	const [showAddExercisePanel, setShowAddExercisePanel] = useState(true);
+
 	const [upperBody, setUpperBody] = useState(user.exercises.upperBodyExercises);
 	const [lowerBody, setLowerBody] = useState(exercisesData.lowerBodyExercises);
 	const [fullBody, setFullBody] = useState(exercisesData.fullBodyExercises);
 
 	const [exercises, setExercises] = useState(exercisesData);
 
-	console.log(user);
+	// console.log(user);
+	console.log(upperBody);
 
 	const handleSaveUpperBody = async (id, newReps, newWeight) => {
 		const updatedData = upperBody.map((item) => {
@@ -316,6 +320,20 @@ export default function YourTraining({ user }) {
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 				userExercises: updatedData,
+				email: user.email,
+			}),
+		});
+	};
+
+	const handleAddExerciseUpperBody = async (newExercise) => {
+		setUpperBody([...upperBody, newExercise]);
+		handleShowAddExerciseForm();
+
+		const data = await fetch("/api/addExercise", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				userExercise: newExercise,
 				email: user.email,
 			}),
 		});
@@ -345,6 +363,10 @@ export default function YourTraining({ user }) {
 		setLowerBody(updatedData);
 	};
 
+	const handleShowAddExerciseForm = () => {
+		setShowAddExercisePanel(!showAddExercisePanel);
+	};
+
 	return (
 		<section className='p-4'>
 			<h2 className='text-3xl font-bold mb-4'>Your Training</h2>
@@ -363,10 +385,21 @@ export default function YourTraining({ user }) {
 						/>
 					))}
 				</div>
+				{showAddExercisePanel && (
+					<YourTrainingAddExercise
+						id={upperBody.length}
+						handleShowAddExerciseForm={handleShowAddExerciseForm}
+						handleAddExerciseUpperBody={handleAddExerciseUpperBody}
+					/>
+				)}
 				<div className='text-center'>
-					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'>
-						Add exercise
-					</button>
+					{!showAddExercisePanel && (
+						<button
+							className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'
+							onClick={handleShowAddExerciseForm}>
+							Add exercise
+						</button>
+					)}
 				</div>
 			</div>
 			<div>

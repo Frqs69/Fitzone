@@ -43,11 +43,18 @@ export default function YourTrainingExercise({
 			<div className='flex justify-between mb-6 mt-2'>
 				<p className='text-xl'>{`Exercise ${id}`}</p>
 				{activeEditing ? (
-					<button
-						className='text-xl bg-orange-400 text-white font-bold px-2 py-1'
-						onClick={() => handleSave(id)}>
-						Save
-					</button>
+					<div className='flex items-center gap-4 '>
+						<p
+							onClick={handleEditing}
+							className='cursor-pointer text-orange-400'>
+							Cancel
+						</p>
+						<button
+							className='text-xl bg-orange-400 text-white font-bold px-2 py-1'
+							onClick={() => handleSave(id)}>
+							Save
+						</button>
+					</div>
 				) : (
 					<button
 						className='text-xl text-orange-400 font-bold px-2 py-1'
