@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { Icon } from "@iconify/react";
 
 export default function YourTrainingExercise({
 	id,
@@ -38,10 +39,22 @@ export default function YourTrainingExercise({
 		handleEditing();
 	};
 
+	const handleDeleteData = (id) => {
+		handleSaveData(id, "", "", "");
+	};
+
 	return (
 		<div className='border p-4 mb-8  '>
 			<div className='flex justify-between mb-6 mt-2'>
-				<p className='text-xl'>{`Exercise ${id}`}</p>
+				<div className='flex items-center'>
+					<p className='text-xl'>{`Exercise ${id}`}</p>
+					<Icon
+						icon='entypo:trash'
+						className='ml-4 cursor-pointer text-black/30'
+						// width={10}
+						onClick={() => handleDeleteData(id)}
+					/>
+				</div>
 				{activeEditing ? (
 					<div className='flex items-center gap-4 '>
 						<p

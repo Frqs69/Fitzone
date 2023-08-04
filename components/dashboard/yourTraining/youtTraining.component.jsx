@@ -304,14 +304,40 @@ export default function YourTraining({ user }) {
 	// console.log(user);
 	console.log(upperBody);
 
-	const handleSaveUpperBody = async (id, newReps, newWeight) => {
-		const updatedData = upperBody.map((item) => {
-			if (item.id === id) {
-				return { ...item, reps: newReps, weight: newWeight };
-			} else {
-				return item;
+	//combined function
+	// handleSaveUpperBody(id, newReps, newWeight, '') - edit exercise and save to database
+	// handleSaveUpperBody('','','', newExercise) - add exercise and save to database
+	const handleSaveUpperBody = async (id, newReps, newWeight, newExercise) => {
+		let updatedData;
+
+		if (!newExercise) {
+			if (newReps || newWeight) {
+				console.log("new reps and new weight");
+				updatedData = upperBody.map((item) => {
+					if (item.id === id) {
+						return { ...item, reps: newReps, weight: newWeight };
+					} else {
+						return item;
+					}
+				});
 			}
-		});
+
+			if (!newReps && !newWeight) {
+				console.log("delete");
+				console.log("id", id);
+				const filteredData = upperBody.filter((item) => item.id != id);
+				updatedData = filteredData.map((item, index) => ({
+					...item,
+					id: index + 1,
+				}));
+			}
+		}
+
+		if (newExercise) {
+			console.log("new Exercise");
+			updatedData = [...upperBody, newExercise];
+			handleShowAddExerciseForm();
+		}
 
 		setUpperBody(updatedData);
 
@@ -325,6 +351,7 @@ export default function YourTraining({ user }) {
 		});
 	};
 
+	// separate function responsible for adding exercise to database
 	const handleAddExerciseUpperBody = async (newExercise) => {
 		setUpperBody([...upperBody, newExercise]);
 		handleShowAddExerciseForm();
@@ -389,7 +416,7 @@ export default function YourTraining({ user }) {
 					<YourTrainingAddExercise
 						id={upperBody.length}
 						handleShowAddExerciseForm={handleShowAddExerciseForm}
-						handleAddExerciseUpperBody={handleAddExerciseUpperBody}
+						handleAddExerciseUpperBody={handleSaveUpperBody}
 					/>
 				)}
 				<div className='text-center'>

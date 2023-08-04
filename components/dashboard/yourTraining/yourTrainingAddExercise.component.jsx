@@ -40,7 +40,7 @@ export default function YourTrainingAddExercise({
 
 		console.log(newExercise);
 
-		await handleAddExerciseUpperBody(newExercise);
+		await handleAddExerciseUpperBody("", "", "", newExercise);
 	};
 
 	return (
