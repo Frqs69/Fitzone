@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 			.collection("users")
 			.updateOne(
 				{ email: userEmail },
-				{ $set: { exercises: { upperBodyExercises: userExercises } } }
+				{ $set: { "exercises.upperBodyExercises": userExercises } }
 			);
 
 		client.close();

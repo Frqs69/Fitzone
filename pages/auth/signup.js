@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { createUser } from "@/lib/createUser";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "../api/auth/[...nextauth]";
 
@@ -31,6 +32,16 @@ export default function SignUpPage() {
 			console.log("asd", res);
 		} catch (err) {
 			console.log(err);
+		}
+
+		try {
+			const result = await signIn("credentials", {
+				redirect: false,
+				email: email,
+				password: password,
+			});
+		} catch (err) {
+			console.log("cant log in ", err);
 		}
 
 		router.replace("/dashboard/yourTraining");

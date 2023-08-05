@@ -1,6 +1,7 @@
 import { useState } from "react";
 import YourTrainingExercise from "./yourTrainingExercise.component";
 import YourTrainingAddExercise from "./yourTrainingAddExercise.component";
+import { editUserExercise } from "@/lib/editUserExercises";
 
 const upperBodyExercises = [
 	{
@@ -341,14 +342,52 @@ export default function YourTraining({ user }) {
 
 		setUpperBody(updatedData);
 
-		const data = await fetch("/api/updateExercise", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				userExercises: updatedData,
-				email: user.email,
-			}),
+		const data = await editUserExercise(user.email, updatedData);
+	};
+
+	//exerciseCollection - ['upperBodyExercises', 'lowerBodyExercises', 'fullBodyExercises']
+
+	const handleAddExercise = async (newExercise, exerciseCollection) => {
+		const updatedData = [...upperBody, newExercise];
+		handleShowAddExerciseForm();
+		const data = await editUserExercise(
+			user.email,
+			updatedData,
+			exerciseCollection
+		);
+	};
+
+	const handleEditExercise = async (
+		id,
+		newReps,
+		newWeight,
+		exerciseCollection
+	) => {
+		const updatedData = upperBody.map((item) => {
+			if (item.id === id) {
+				return { ...item, reps: newReps, weight: newWeight };
+			} else {
+				return item;
+			}
 		});
+		const data = await editUserExercise(
+			user.email,
+			updatedData,
+			exerciseCollection
+		);
+	};
+
+	const handleDeleteExercise = async (id, exerciseCollection) => {
+		const filteredData = upperBody.filter((item) => item.id != id);
+		const updatedData = filteredData.map((item, index) => ({
+			...item,
+			id: index + 1,
+		}));
+		const data = await editUserExercise(
+			user.email,
+			updatedData,
+			exerciseCollection
+		);
 	};
 
 	// separate function responsible for adding exercise to database

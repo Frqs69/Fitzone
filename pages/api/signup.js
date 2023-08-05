@@ -59,6 +59,11 @@ export default async function handler(req, res) {
 			login: login,
 			email: email,
 			password: hashedPassword,
+			exercises: {
+				upperBodyExercises: [],
+				lowerBodyExercises: [],
+				fullBodyExercises: [],
+			},
 		});
 
 		client.close();
