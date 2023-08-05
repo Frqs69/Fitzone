@@ -3,7 +3,6 @@ import { useState } from "react";
 export default function YourTrainingInputField({
 	weight,
 	weightRef,
-	setShowErrorMessage,
 	handleShowErrorMessage,
 }) {
 	const [errorBorder, setErrorBorder] = useState(false);
@@ -18,7 +17,7 @@ export default function YourTrainingInputField({
 			handleShowErrorMessage();
 			setErrorBorder(false);
 		} else {
-			setShowErrorMessage(true);
+			handleShowErrorMessage();
 			setErrorBorder(true);
 		}
 	};

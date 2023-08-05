@@ -26,6 +26,7 @@ export default function YourTrainingExercise({
 
 	const handleEditing = () => {
 		setActiveEditing(!activeEditing);
+		setShowErrorMessage(false);
 	};
 
 	const handleSave = async (id) => {
@@ -183,19 +184,16 @@ export default function YourTrainingExercise({
 						<YourTrainingInputField
 							weight={weight}
 							weightRef={weightOneRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
 							weight={weight}
 							weightRef={weightTwoRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
 							weight={weight}
 							weightRef={weightThreeRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					</div>
@@ -206,19 +204,16 @@ export default function YourTrainingExercise({
 						<YourTrainingInputField
 							weight={reps}
 							weightRef={repOneRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
 							weight={reps}
 							weightRef={repTwoRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
 							weight={reps}
 							weightRef={repThreeRef}
-							setShowErrorMessage={setShowErrorMessage}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					</form>
