@@ -182,17 +182,17 @@ export default function YourTrainingExercise({
 					<div className='grid grid-cols-4 mb-4'>
 						<p>{weightType}</p>
 						<YourTrainingInputField
-							weight={weight}
+							weight={weight[0]}
 							weightRef={weightOneRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
-							weight={weight}
+							weight={weight[1]}
 							weightRef={weightTwoRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
-							weight={weight}
+							weight={weight[2]}
 							weightRef={weightThreeRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
@@ -202,17 +202,17 @@ export default function YourTrainingExercise({
 					<form className='grid grid-cols-4'>
 						<p>Reps</p>
 						<YourTrainingInputField
-							weight={reps}
+							weight={reps[0]}
 							weightRef={repOneRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
-							weight={reps}
+							weight={reps[1]}
 							weightRef={repTwoRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 						<YourTrainingInputField
-							weight={reps}
+							weight={reps[2]}
 							weightRef={repThreeRef}
 							handleShowErrorMessage={handleShowErrorMessage}
 						/>

@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import YourTrainingInputField from "./yourTrainingInputField";
 
 export default function YourTrainingAddExercise({
 	id,
@@ -7,6 +8,7 @@ export default function YourTrainingAddExercise({
 	exerciseCollection,
 }) {
 	const [showInputs, setShowInputs] = useState(true);
+	const [showErrorMessage, setShowErrorMessage] = useState(false);
 	const nameRef = useRef();
 	const weightTypeRef = useRef();
 	const repOneRef = useRef();
@@ -27,7 +29,7 @@ export default function YourTrainingAddExercise({
 
 	console.log(showInputs);
 
-	const handleSave = async (e) => {
+	const handleSave = (e) => {
 		e.preventDefault();
 
 		const name = nameRef.current.value;
@@ -57,13 +59,37 @@ export default function YourTrainingAddExercise({
 
 		console.log(newExercise);
 
-		await handleAddExercise(newExercise, exerciseCollection);
+		handleAddExercise(newExercise, exerciseCollection);
+	};
+
+	function containsOnlyNumbers(input) {
+		return /^\d+$/.test(input);
+	}
+
+	const handleShowErrorMessage = () => {
+		if (
+			containsOnlyNumbers(weightOneRef.current.value) &&
+			containsOnlyNumbers(weightTwoRef.current.value) &&
+			containsOnlyNumbers(weightThreeRef.current.value) &&
+			containsOnlyNumbers(repOneRef.current.value) &&
+			containsOnlyNumbers(repTwoRef.current.value) &&
+			containsOnlyNumbers(repThreeRef.current.value)
+		) {
+			setShowErrorMessage(false);
+		} else {
+			setShowErrorMessage(true);
+		}
 	};
 
 	return (
 		<form className='border p-4 mb-8  ' onSubmit={handleSave}>
 			<div className='flex justify-between mb-6 mt-2'>
 				<p className='text-xl'>{`Exercise ${id + 1}`}</p>
+				{showErrorMessage && (
+					<p className='font-bold text-2xl text-red-500 ml-10'>
+						Use only numbers
+					</p>
+				)}
 				<div className='flex items-center gap-4 '>
 					<p
 						onClick={handleShowAddExerciseForm}
@@ -71,7 +97,10 @@ export default function YourTrainingAddExercise({
 						Cancel
 					</p>
 					<button
-						className='text-xl bg-orange-400 text-white font-bold px-2 py-1'
+						className={`text-xl bg-orange-400 text-white font-bold px-2 py-1 ${
+							showErrorMessage && "bg-orange-400/50"
+						}`}
+						disabled={showErrorMessage}
 						type='submit'>
 						Save
 					</button>
@@ -82,6 +111,7 @@ export default function YourTrainingAddExercise({
 				className='text-lg mb-4 font-bold border w-[97%] pl-2'
 				placeholder='Exercise Name'
 				ref={nameRef}
+				required
 			/>
 			<div>
 				<div className='grid grid-cols-4 mb-4'>
@@ -96,34 +126,28 @@ export default function YourTrainingAddExercise({
 						<option value='-'>None</option>
 					</select>
 					{showInputs ? (
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={0}
-							className='border text-center mr-2'
-							ref={weightOneRef}
+						<YourTrainingInputField
+							weight={0}
+							weightRef={weightOneRef}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					) : (
 						<p className='text-center'>-</p>
 					)}
 					{showInputs ? (
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={0}
-							className='border text-center mr-2'
-							ref={weightTwoRef}
+						<YourTrainingInputField
+							weight={0}
+							weightRef={weightTwoRef}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					) : (
 						<p className='text-center'>-</p>
 					)}
 					{showInputs ? (
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={0}
-							className='border text-center mr-2'
-							ref={weightThreeRef}
+						<YourTrainingInputField
+							weight={0}
+							weightRef={weightThreeRef}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					) : (
 						<p className='text-center'>-</p>
@@ -132,24 +156,20 @@ export default function YourTrainingAddExercise({
 
 				<div className='grid grid-cols-4'>
 					<p>Reps</p>
-					<input
-						pattern='[0-9]*'
-						type='number'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={repOneRef}
+					<YourTrainingInputField
+						weight={0}
+						weightRef={repOneRef}
+						handleShowErrorMessage={handleShowErrorMessage}
 					/>
-					<input
-						type='text'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={repTwoRef}
+					<YourTrainingInputField
+						weight={0}
+						weightRef={repTwoRef}
+						handleShowErrorMessage={handleShowErrorMessage}
 					/>
-					<input
-						type='text'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={repThreeRef}
+					<YourTrainingInputField
+						weight={0}
+						weightRef={repThreeRef}
+						handleShowErrorMessage={handleShowErrorMessage}
 					/>
 				</div>
 			</div>

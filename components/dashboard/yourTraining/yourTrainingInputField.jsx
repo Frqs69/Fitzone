@@ -25,12 +25,13 @@ export default function YourTrainingInputField({
 	return (
 		<input
 			type='text'
-			defaultValue={weight[0]}
+			defaultValue={weight}
 			className={`border text-center mr-2 ${
 				errorBorder && " border-red-600 border-2"
 			}`}
 			ref={weightRef}
 			onChange={handleEdit}
+			required
 		/>
 	);
 }
