@@ -2,6 +2,7 @@ import { useState } from "react";
 import YourTrainingExercise from "./yourTrainingExercise.component";
 import YourTrainingAddExercise from "./yourTrainingAddExercise.component";
 import { editUserExercise } from "@/lib/editUserExercises";
+import YourTrainingExerciseCollection from "./yourTrainingExerciseCollection.component";
 
 const upperBodyExercises = [
 	{
@@ -291,16 +292,14 @@ export default function YourTraining({ user }) {
 	// console.log("user from your training", user.upperBodyExercises);
 	// console.log(upperBodyExercises);
 	if (!user) {
-		return <p>Loading...</p>;
+		return <div>Loading...</div>;
 	}
 
-	const [showAddExercisePanel, setShowAddExercisePanel] = useState(true);
+	const [showAddExercisePanel, setShowAddExercisePanel] = useState(false);
 
 	const [upperBody, setUpperBody] = useState(user.exercises.upperBodyExercises);
-	const [lowerBody, setLowerBody] = useState(exercisesData.lowerBodyExercises);
-	const [fullBody, setFullBody] = useState(exercisesData.fullBodyExercises);
-
-	const [exercises, setExercises] = useState(exercisesData);
+	const [lowerBody, setLowerBody] = useState(user.exercises.lowerBodyExercises);
+	const [fullBody, setFullBody] = useState(user.exercises.fullBodyExercises);
 
 	// console.log(user);
 	console.log(upperBody);
@@ -348,8 +347,16 @@ export default function YourTraining({ user }) {
 	//exerciseCollection - ['upperBodyExercises', 'lowerBodyExercises', 'fullBodyExercises']
 
 	const handleAddExercise = async (newExercise, exerciseCollection) => {
-		const updatedData = [...upperBody, newExercise];
+		let dataToEdit;
+		if (exerciseCollection === "upperBodyExercises") dataToEdit = upperBody;
+		if (exerciseCollection === "lowerBodyExercises") dataToEdit = lowerBody;
+		if (exerciseCollection === "fullBodyExercises") dataToEdit = fullBody;
+
+		const updatedData = [...dataToEdit, newExercise];
 		handleShowAddExerciseForm();
+
+		if (exerciseCollection === "upperBodyExercises") setUpperBody(updatedData);
+
 		const data = await editUserExercise(
 			user.email,
 			updatedData,
@@ -357,19 +364,27 @@ export default function YourTraining({ user }) {
 		);
 	};
 
-	const handleEditExercise = async (
+	const handleUpdateExercise = async (
 		id,
 		newReps,
 		newWeight,
 		exerciseCollection
 	) => {
-		const updatedData = upperBody.map((item) => {
+		let dataToEdit;
+		if (exerciseCollection === "upperBodyExercises") dataToEdit = upperBody;
+		if (exerciseCollection === "lowerBodyExercises") dataToEdit = lowerBody;
+		if (exerciseCollection === "fullBodyExercises") dataToEdit = fullBody;
+
+		const updatedData = dataToEdit.map((item) => {
 			if (item.id === id) {
 				return { ...item, reps: newReps, weight: newWeight };
 			} else {
 				return item;
 			}
 		});
+
+		if (exerciseCollection === "upperBodyExercises") setUpperBody(updatedData);
+
 		const data = await editUserExercise(
 			user.email,
 			updatedData,
@@ -378,11 +393,19 @@ export default function YourTraining({ user }) {
 	};
 
 	const handleDeleteExercise = async (id, exerciseCollection) => {
-		const filteredData = upperBody.filter((item) => item.id != id);
+		let dataToEdit;
+		if (exerciseCollection === "upperBodyExercises") dataToEdit = upperBody;
+		if (exerciseCollection === "lowerBodyExercises") dataToEdit = lowerBody;
+		if (exerciseCollection === "fullBodyExercises") dataToEdit = fullBody;
+
+		const filteredData = dataToEdit.filter((item) => item.id != id);
 		const updatedData = filteredData.map((item, index) => ({
 			...item,
 			id: index + 1,
 		}));
+
+		if (exerciseCollection === "upperBodyExercises") setUpperBody(updatedData);
+
 		const data = await editUserExercise(
 			user.email,
 			updatedData,
@@ -436,6 +459,10 @@ export default function YourTraining({ user }) {
 	return (
 		<section className='p-4'>
 			<h2 className='text-3xl font-bold mb-4'>Your Training</h2>
+			<YourTrainingExerciseCollection
+				exerciseCollection='upperBodyExercises'
+				exerciseData={upperBody}
+			/>
 			<div className='mb-10'>
 				<h3 className='text-xl font-bold mb-8'>Monday - UpperBody</h3>
 				<div>
@@ -448,6 +475,9 @@ export default function YourTraining({ user }) {
 							weight={item.weight}
 							reps={item.reps}
 							handleSaveData={handleSaveUpperBody}
+							handleDeleteExercise={handleDeleteExercise}
+							handleUpdateExercise={handleUpdateExercise}
+							exerciseCollection='upperBodyExercises'
 						/>
 					))}
 				</div>
@@ -455,7 +485,8 @@ export default function YourTraining({ user }) {
 					<YourTrainingAddExercise
 						id={upperBody.length}
 						handleShowAddExerciseForm={handleShowAddExerciseForm}
-						handleAddExerciseUpperBody={handleSaveUpperBody}
+						handleAddExercise={handleAddExercise}
+						exerciseCollection='upperBodyExercises'
 					/>
 				)}
 				<div className='text-center'>
@@ -471,21 +502,35 @@ export default function YourTraining({ user }) {
 			<div>
 				<h3 className='text-xl font-bold mb-8'>Wednesday - LowerBody</h3>
 				<div>
-					{exercises.lowerBodyExercises.map((item) => (
+					{lowerBody.map((item) => (
 						<YourTrainingExercise
 							id={item.id}
 							name={item.name}
 							weightType={item.weightType}
 							weight={item.weight}
 							reps={item.reps}
-							handleSaveData={handleSaveLowerBody}
+							handleDeleteExercise={handleDeleteExercise}
+							handleUpdateExercise={handleUpdateExercise}
+							exerciseCollection='lowerBodyExercises'
 						/>
 					))}
 				</div>
+				{showAddExercisePanel && (
+					<YourTrainingAddExercise
+						id={lowerBody.length}
+						handleShowAddExerciseForm={handleShowAddExerciseForm}
+						handleAddExercise={handleAddExercise}
+						exerciseCollection='lowerBodyExercises'
+					/>
+				)}
 				<div className='text-center'>
-					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'>
-						Add exercise
-					</button>
+					{!showAddExercisePanel && (
+						<button
+							className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'
+							onClick={handleShowAddExerciseForm}>
+							Add exercise
+						</button>
+					)}
 				</div>
 			</div>
 			<div>
@@ -498,14 +543,29 @@ export default function YourTraining({ user }) {
 							weightType={item.weightType}
 							weight={item.weight}
 							reps={item.reps}
-							handleSaveData={handleSaveFullBody}
+							handleAddExercise={handleAddExercise}
+							handleDeleteExercise={handleDeleteExercise}
+							handleUpdateExercise={handleUpdateExercise}
+							exerciseCollection='fullBodyExercises'
 						/>
 					))}
 				</div>
+				{showAddExercisePanel && (
+					<YourTrainingAddExercise
+						id={fullBody.length}
+						handleShowAddExerciseForm={handleShowAddExerciseForm}
+						handleAddExercise={handleAddExercise}
+						exerciseCollection='fullBodyExercises'
+					/>
+				)}
 				<div className='text-center'>
-					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'>
-						Add exercise
-					</button>
+					{!showAddExercisePanel && (
+						<button
+							className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'
+							onClick={handleShowAddExerciseForm}>
+							Add exercise
+						</button>
+					)}
 				</div>
 			</div>
 		</section>

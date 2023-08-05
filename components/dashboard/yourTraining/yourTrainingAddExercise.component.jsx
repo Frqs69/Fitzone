@@ -3,7 +3,8 @@ import { useState, useRef } from "react";
 export default function YourTrainingAddExercise({
 	id,
 	handleShowAddExerciseForm,
-	handleAddExerciseUpperBody,
+	handleAddExercise,
+	exerciseCollection,
 }) {
 	const nameRef = useRef();
 	const weightTypeRef = useRef();
@@ -40,7 +41,7 @@ export default function YourTrainingAddExercise({
 
 		console.log(newExercise);
 
-		await handleAddExerciseUpperBody("", "", "", newExercise);
+		await handleAddExercise(newExercise, exerciseCollection);
 	};
 
 	return (

@@ -7,7 +7,9 @@ export default function YourTrainingExercise({
 	weightType,
 	weight,
 	reps,
-	handleSaveData,
+	handleUpdateExercise,
+	handleDeleteExercise,
+	exerciseCollection,
 }) {
 	const [activeEditing, setActiveEditing] = useState(false);
 	const repOneRef = useRef();
@@ -30,17 +32,19 @@ export default function YourTrainingExercise({
 		const weightTwo = weightTwoRef.current.value;
 		const weightThree = weightThreeRef.current.value;
 
-		handleSaveData(
+		handleUpdateExercise(
 			id,
 			[repOne, repTwo, repThree],
-			[weightOne, weightTwo, weightThree]
+			[weightOne, weightTwo, weightThree],
+			"upperBodyExercises"
 		);
 
 		handleEditing();
 	};
 
 	const handleDeleteData = (id) => {
-		handleSaveData(id, "", "", "");
+		// handleSaveData(id, "", "", "");
+		handleDeleteExercise(id, exerciseCollection);
 	};
 
 	return (

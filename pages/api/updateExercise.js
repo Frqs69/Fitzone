@@ -4,6 +4,7 @@ export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const userEmail = req.body.email;
 		const userExercises = req.body.userExercises;
+		const exerciseCollection = req.body.exerciseCollection;
 
 		console.log(userEmail);
 
@@ -21,7 +22,7 @@ export default async function handler(req, res) {
 			.collection("users")
 			.updateOne(
 				{ email: userEmail },
-				{ $set: { "exercises.upperBodyExercises": userExercises } }
+				{ $set: { [`exercises.${exerciseCollection}`]: userExercises } }
 			);
 
 		client.close();
