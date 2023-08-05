@@ -26,6 +26,8 @@ export default async function handler(req, res) {
 			);
 
 		client.close();
+
+		
 		res
 			.status(201)
 			.json({ message: "Exercise Added", updatedUser: updatedUser });

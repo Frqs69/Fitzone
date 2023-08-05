@@ -1,3 +1,4 @@
+import YourTrainingInputField from "./yourTrainingInputField";
 import { useState, useRef } from "react";
 import { Icon } from "@iconify/react";
 
@@ -18,37 +19,102 @@ export default function YourTrainingExercise({
 	const weightOneRef = useRef();
 	const weightTwoRef = useRef();
 	const weightThreeRef = useRef();
+	const [isSaving, setIsSaving] = useState(false);
+	const [saved, setSaved] = useState(false);
+	const [confirmDeletePanel, setConfirmDeletePanel] = useState(false);
+	const [showErrorMessage, setShowErrorMessage] = useState(false);
 
 	const handleEditing = () => {
 		setActiveEditing(!activeEditing);
 	};
 
-	const handleSave = (id) => {
+	const handleSave = async (id) => {
 		const repOne = repOneRef.current.value;
 		const repTwo = repTwoRef.current.value;
 		const repThree = repThreeRef.current.value;
 
-		const weightOne = weightOneRef.current.value;
-		const weightTwo = weightTwoRef.current.value;
-		const weightThree = weightThreeRef.current.value;
+		let weightOne = "-";
+		let weightTwo = "-";
+		let weightThree = "-";
 
-		handleUpdateExercise(
+		if (weightType != "-") {
+			weightOne = weightOneRef.current.value;
+			weightTwo = weightTwoRef.current.value;
+			weightThree = weightThreeRef.current.value;
+		}
+
+		handleEditing();
+
+		setIsSaving(!isSaving);
+
+		const res = await handleUpdateExercise(
 			id,
 			[repOne, repTwo, repThree],
 			[weightOne, weightTwo, weightThree],
-			"upperBodyExercises"
+			exerciseCollection
 		);
 
-		handleEditing();
+		console.log(res.ok);
+
+		if (res.ok) {
+			setIsSaving(false);
+			setSaved(true);
+
+			setTimeout(() => {
+				setSaved(false);
+			}, 1000);
+		}
 	};
 
-	const handleDeleteData = (id) => {
+	const handleDeleteData = async (id) => {
 		// handleSaveData(id, "", "", "");
-		handleDeleteExercise(id, exerciseCollection);
+		const res = await handleDeleteExercise(id, exerciseCollection);
+		setConfirmDeletePanel(false);
+	};
+
+	const handleShowConfirmDeletePanel = () => {
+		setConfirmDeletePanel(!confirmDeletePanel);
+	};
+
+	function containsOnlyNumbers(input) {
+		return /^\d+$/.test(input);
+	}
+
+	const handleShowErrorMessage = () => {
+		if (
+			containsOnlyNumbers(weightOneRef.current.value) &&
+			containsOnlyNumbers(weightTwoRef.current.value) &&
+			containsOnlyNumbers(weightThreeRef.current.value) &&
+			containsOnlyNumbers(repOneRef.current.value) &&
+			containsOnlyNumbers(repTwoRef.current.value) &&
+			containsOnlyNumbers(repThreeRef.current.value)
+		) {
+			setShowErrorMessage(false);
+		} else {
+			setShowErrorMessage(true);
+		}
 	};
 
 	return (
-		<div className='border p-4 mb-8  '>
+		<div className='border p-4 mb-8 relative '>
+			{confirmDeletePanel && (
+				<div className='absolute top-0 right-0 w-full h-full flex flex-col justify-center items-center bg-white/90'>
+					<p className='font-bold text-2xl'>Delete?</p>
+					<div className='mt-6 '>
+						<button
+							className='border border-orange-400 py-2 px-3 text-xl '
+							onClick={handleShowConfirmDeletePanel}>
+							No
+						</button>
+						<button
+							className='border border-orange-400 py-2 px-3 text-xl ml-4'
+							onClick={() => handleDeleteData(id)}>
+							Yes
+						</button>
+					</div>
+				</div>
+			)}
+
 			<div className='flex justify-between mb-6 mt-2'>
 				<div className='flex items-center'>
 					<p className='text-xl'>{`Exercise ${id}`}</p>
@@ -56,8 +122,17 @@ export default function YourTrainingExercise({
 						icon='entypo:trash'
 						className='ml-4 cursor-pointer text-black/30'
 						// width={10}
-						onClick={() => handleDeleteData(id)}
+						onClick={handleShowConfirmDeletePanel}
 					/>
+					{isSaving && <p className='text-orange-400 ml-4'>Saving...</p>}
+					{saved && (
+						<p className='text-orange-400 ml-4  font-bold text-xl'>Saved!</p>
+					)}
+					{showErrorMessage && (
+						<p className='font-bold text-2xl text-red-500 ml-10'>
+							Use only numbers
+						</p>
+					)}
 				</div>
 				{activeEditing ? (
 					<div className='flex items-center gap-4 '>
@@ -67,8 +142,11 @@ export default function YourTrainingExercise({
 							Cancel
 						</p>
 						<button
-							className='text-xl bg-orange-400 text-white font-bold px-2 py-1'
-							onClick={() => handleSave(id)}>
+							className={`text-xl bg-orange-400 text-white font-bold px-2 py-1 ${
+								showErrorMessage && "bg-orange-400/50"
+							}`}
+							onClick={() => handleSave(id)}
+							disabled={showErrorMessage}>
 							Save
 						</button>
 					</div>
@@ -85,58 +163,63 @@ export default function YourTrainingExercise({
 				{!activeEditing && weightType != "-" && (
 					<div className='grid grid-cols-4 mb-4'>
 						<p>{weightType}</p>
-						<p className='text-center mr-2'>{weight[0]}</p>
-						<p className='text-center mr-2'>{weight[1]}</p>
-						<p className='text-center mr-2'>{weight[2]}</p>
+						<p className='text-center mr-2'>
+							{weight[0]}
+							{weightType === "Weight" && " kg"}
+						</p>
+						<p className='text-center mr-2'>
+							{weight[1]}
+							{weightType === "Weight" && " kg"}
+						</p>
+						<p className='text-center mr-2'>
+							{weight[2]}
+							{weightType === "Weight" && " kg"}
+						</p>
 					</div>
 				)}
-				{activeEditing && (
+				{activeEditing && weightType != "-" && (
 					<div className='grid grid-cols-4 mb-4'>
 						<p>{weightType}</p>
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={weight[0]}
-							className='border text-center mr-2'
-							ref={weightOneRef}
+						<YourTrainingInputField
+							weight={weight}
+							weightRef={weightOneRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={weight[1]}
-							className='border text-center mr-2'
-							ref={weightTwoRef}
+						<YourTrainingInputField
+							weight={weight}
+							weightRef={weightTwoRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={weight[2]}
-							className='border text-center mr-2'
-							ref={weightThreeRef}
+						<YourTrainingInputField
+							weight={weight}
+							weightRef={weightThreeRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					</div>
 				)}
 				{activeEditing && (
 					<form className='grid grid-cols-4'>
 						<p>Reps</p>
-						<input
-							pattern='[0-9]*'
-							type='number'
-							defaultValue={reps[0]}
-							className='border text-center mr-2'
-							ref={repOneRef}
+						<YourTrainingInputField
+							weight={reps}
+							weightRef={repOneRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
-						<input
-							type='text'
-							defaultValue={reps[1]}
-							className='border text-center mr-2'
-							ref={repTwoRef}
+						<YourTrainingInputField
+							weight={reps}
+							weightRef={repTwoRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
-						<input
-							type='text'
-							defaultValue={reps[2]}
-							className='border text-center mr-2'
-							ref={repThreeRef}
+						<YourTrainingInputField
+							weight={reps}
+							weightRef={repThreeRef}
+							setShowErrorMessage={setShowErrorMessage}
+							handleShowErrorMessage={handleShowErrorMessage}
 						/>
 					</form>
 				)}

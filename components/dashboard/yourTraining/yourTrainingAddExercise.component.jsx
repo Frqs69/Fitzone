@@ -6,6 +6,7 @@ export default function YourTrainingAddExercise({
 	handleAddExercise,
 	exerciseCollection,
 }) {
+	const [showInputs, setShowInputs] = useState(true);
 	const nameRef = useRef();
 	const weightTypeRef = useRef();
 	const repOneRef = useRef();
@@ -15,7 +16,16 @@ export default function YourTrainingAddExercise({
 	const weightTwoRef = useRef();
 	const weightThreeRef = useRef();
 
-	console.log("id", id);
+	const handleSelectChange = () => {
+		console.log(weightTypeRef.current.value);
+		if (weightTypeRef.current.value === "-") {
+			setShowInputs(false);
+		} else {
+			setShowInputs(true);
+		}
+	};
+
+	console.log(showInputs);
 
 	const handleSave = async (e) => {
 		e.preventDefault();
@@ -27,9 +37,15 @@ export default function YourTrainingAddExercise({
 		const repTwo = repTwoRef.current.value;
 		const repThree = repThreeRef.current.value;
 
-		const weightOne = weightOneRef.current.value;
-		const weightTwo = weightTwoRef.current.value;
-		const weightThree = weightThreeRef.current.value;
+		let weightOne = "-";
+		let weightTwo = "-";
+		let weightThree = "-";
+
+		if (weightTypeRef.current.value != "-") {
+			weightOne = weightOneRef.current.value;
+			weightTwo = weightTwoRef.current.value;
+			weightThree = weightThreeRef.current.value;
+		}
 
 		const newExercise = {
 			id: id + 1,
@@ -73,32 +89,45 @@ export default function YourTrainingAddExercise({
 						name='weight'
 						id='weight'
 						className='text-sm mr-1'
-						ref={weightTypeRef}>
+						ref={weightTypeRef}
+						onChange={handleSelectChange}>
 						<option value='Weight'>Weight</option>
 						<option value='Tiles'>Tiles</option>
 						<option value='-'>None</option>
 					</select>
-					<input
-						pattern='[0-9]*'
-						type='number'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={weightOneRef}
-					/>
-					<input
-						pattern='[0-9]*'
-						type='number'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={weightTwoRef}
-					/>
-					<input
-						pattern='[0-9]*'
-						type='number'
-						defaultValue={0}
-						className='border text-center mr-2'
-						ref={weightThreeRef}
-					/>
+					{showInputs ? (
+						<input
+							pattern='[0-9]*'
+							type='number'
+							defaultValue={0}
+							className='border text-center mr-2'
+							ref={weightOneRef}
+						/>
+					) : (
+						<p className='text-center'>-</p>
+					)}
+					{showInputs ? (
+						<input
+							pattern='[0-9]*'
+							type='number'
+							defaultValue={0}
+							className='border text-center mr-2'
+							ref={weightTwoRef}
+						/>
+					) : (
+						<p className='text-center'>-</p>
+					)}
+					{showInputs ? (
+						<input
+							pattern='[0-9]*'
+							type='number'
+							defaultValue={0}
+							className='border text-center mr-2'
+							ref={weightThreeRef}
+						/>
+					) : (
+						<p className='text-center'>-</p>
+					)}
 				</div>
 
 				<div className='grid grid-cols-4'>

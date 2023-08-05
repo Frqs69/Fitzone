@@ -6,6 +6,7 @@ import { editUserExercise } from "@/lib/editUserExercises";
 export default function YourTrainingExerciseCollection({
 	exerciseCollection,
 	exerciseData,
+	user,
 }) {
 	const [showAddExercisePanel, setShowAddExercisePanel] = useState(false);
 	const [exerciseCollectionData, setExerciseCollectionData] =
@@ -21,7 +22,7 @@ export default function YourTrainingExerciseCollection({
 
 		setExerciseCollectionData(updatedData);
 
-		const data = await editUserExercise(
+		const res = await editUserExercise(
 			user.email,
 			updatedData,
 			exerciseCollection
@@ -39,11 +40,13 @@ export default function YourTrainingExerciseCollection({
 
 		setExerciseCollectionData(updatedData);
 
-		const data = await editUserExercise(
+		const res = await editUserExercise(
 			user.email,
 			updatedData,
 			exerciseCollection
 		);
+
+		return res;
 	};
 
 	const handleDeleteExercise = async (id) => {
@@ -55,17 +58,37 @@ export default function YourTrainingExerciseCollection({
 
 		setExerciseCollectionData(updatedData);
 
-		const data = await editUserExercise(
+		const res = await editUserExercise(
 			user.email,
 			updatedData,
 			exerciseCollection
 		);
+
+		return res;
 	};
 
+	function getExerciseCategory(exerciseCollection) {
+		switch (exerciseCollection) {
+			case "upperBodyExercises":
+				return "Upper Body";
+			case "lowerBodyExercises":
+				return "Lower Body";
+			case "fullBodyExercises":
+				return "Full Body";
+			default:
+				return "Unknown Category";
+		}
+	}
+
+	const collectionTitle = getExerciseCategory(exerciseCollection);
+
 	return (
-		<div className='mb-10'>
-			<h3 className='text-xl font-bold mb-8'>Monday - UpperBody</h3>
+		<div className='mb-10 '>
+			<h3 className='text-xl font-bold mb-8'>{collectionTitle}</h3>
 			<div>
+				{exerciseCollectionData.length === 0 && (
+					<p className='text-center mb-8 mt-14'>{`You haven't added ${collectionTitle.toLowerCase()} exercises yet`}</p>
+				)}
 				{exerciseCollectionData.map((item) => (
 					<YourTrainingExercise
 						key={item.id}
@@ -76,7 +99,7 @@ export default function YourTrainingExerciseCollection({
 						reps={item.reps}
 						handleDeleteExercise={handleDeleteExercise}
 						handleUpdateExercise={handleUpdateExercise}
-						exerciseCollection='upperBodyExercises'
+						exerciseCollection={exerciseCollection}
 					/>
 				))}
 			</div>
@@ -91,7 +114,7 @@ export default function YourTrainingExerciseCollection({
 			<div className='text-center'>
 				{!showAddExercisePanel && (
 					<button
-						className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6'
+						className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6 '
 						onClick={handleShowAddExerciseForm}>
 						Add exercise
 					</button>

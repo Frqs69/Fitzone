@@ -1,12 +1,17 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 export default function DashboardMobileNav() {
 	const [isActive, setIsActive] = useState(false);
 
 	const handleActive = () => {
 		setIsActive(!isActive);
+	};
+
+	const handleLogout = () => {
+		signOut();
 	};
 
 	return (
@@ -31,32 +36,16 @@ export default function DashboardMobileNav() {
 					onClick={handleActive}
 				/>
 
-				<a href='#' onClick={handleActive}>
-					Home
-				</a>
-
-				<a href='#plans' onClick={handleActive}>
-					Plans
-				</a>
-
-				<a href='#trainers' onClick={handleActive}>
-					Trainers
-				</a>
-
-				<a href='#contact' onClick={handleActive}>
-					Contact
-				</a>
+				<Link href='/dashboard/yourTraining' onClick={handleActive}>
+					Your Training
+				</Link>
 
 				<div className='mt-10'>
 					<Link
-						href='/auth/login'
-						className='bg-orange-400  text-white font-bold py-2 px-4 uppercase  '>
-						Login
-					</Link>
-					<Link
-						href='/auth/signup'
-						className='border border-orange-400 py-2 px-4 ml-4'>
-						Sign up
+						href='/'
+						className='border border-orange-400 py-2 px-4 ml-4'
+						onClick={handleLogout}>
+						Log out
 					</Link>
 				</div>
 			</div>
