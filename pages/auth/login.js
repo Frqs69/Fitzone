@@ -2,8 +2,8 @@ import Link from "next/link";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useRef } from "react";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function LoginPage() {
 	const emailRef = useRef();
@@ -114,27 +114,27 @@ export default function LoginPage() {
 }
 
 //! Uncomment on end of project for prevent not logged users to view this page
-// export async function getServerSideProps(context) {
-// 	const session = await getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps(context) {
+	const session = await getServerSession(context.req, context.res, authOptions);
 
-// 	console.log(session);
+	console.log(session);
 
-// 	if (!session) {
-// 		return {
-// 			props: {
-// 				message: "no session",
-// 			},
-// 		};
-// 	}
+	if (!session) {
+		return {
+			props: {
+				message: "no session",
+			},
+		};
+	}
 
-// 	session.user.image = null;
-// 	return {
-// 		redirect: {
-// 			destination: `/dashboard/yourTraining`,
-// 			permanent: false,
-// 		},
-// 		props: {
-// 			session,
-// 		},
-// 	};
-// }
+	session.user.image = null;
+	return {
+		redirect: {
+			destination: `/dashboard/yourTraining`,
+			permanent: false,
+		},
+		props: {
+			session,
+		},
+	};
+}

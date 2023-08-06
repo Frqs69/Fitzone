@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { createUser } from "@/lib/createUser";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 export default function SignUpPage() {
 	const router = useRouter();
@@ -203,25 +203,25 @@ export default function SignUpPage() {
 }
 
 //! Uncomment on end of project for prevent not logged users to view this page
-// export async function getServerSideProps(context) {
-// 	const session = await getServerSession(context.req, context.res, authOptions);
+export async function getServerSideProps(context) {
+	const session = await getServerSession(context.req, context.res, authOptions);
 
-// 	if (!session) {
-// 		return {
-// 			props: {
-// 				message: "no session",
-// 			},
-// 		};
-// 	}
+	if (!session) {
+		return {
+			props: {
+				message: "no session",
+			},
+		};
+	}
 
-// 	session.user.image = null;
-// 	return {
-// 		redirect: {
-// 			destination: `/dashboard/yourTraining`,
-// 			permanent: false,
-// 		},
-// 		props: {
-// 			session,
-// 		},
-// 	};
-// }
+	session.user.image = null;
+	return {
+		redirect: {
+			destination: `/dashboard/yourTraining`,
+			permanent: false,
+		},
+		props: {
+			session,
+		},
+	};
+}
