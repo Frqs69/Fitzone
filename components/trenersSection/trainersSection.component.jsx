@@ -7,9 +7,9 @@ export default function TrainersSection() {
 			<h2 className='font-bold text-3xl my-6 md:mt-16 md:text-4xl uppercase'>
 				Expert <span className='text-orange-400'>Trainers</span>
 			</h2>
-			<p className='mb-10 text-black/70 md:mb-20'>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim minus
-				fugiat dignissimos ullam culpa harum adipisci aliquid.
+			<p className='mb-10 text-black/70 md:mb-20 md:text-xl'>
+				Our team of expert trainers is dedicated to guiding you toward your
+				fitness goals with precision and passion.
 			</p>
 			<TrainersList />
 		</section>

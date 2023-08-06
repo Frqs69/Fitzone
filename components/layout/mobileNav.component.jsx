@@ -31,21 +31,21 @@ export default function MobileNav() {
 					onClick={handleActive}
 				/>
 
-				<a href='#' onClick={handleActive}>
+				<Link href='/' onClick={handleActive}>
 					Home
-				</a>
+				</Link>
 
-				<a href='#plans' onClick={handleActive}>
+				<Link href='/#plans' onClick={handleActive}>
 					Plans
-				</a>
+				</Link>
 
-				<a href='#trainers' onClick={handleActive}>
+				<Link href='/#trainers' onClick={handleActive}>
 					Trainers
-				</a>
+				</Link>
 
-				<a href='#contact' onClick={handleActive}>
+				<Link href='/contact' onClick={handleActive}>
 					Contact
-				</a>
+				</Link>
 
 				<div className='mt-10'>
 					<Link

@@ -8,16 +8,17 @@ export default function WelcomeSection() {
 						Welcome to <span className='text-orange-400'>Fitzone</span>
 					</h2>
 					<p className='mb-6 md:text-lg'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim minus
-						fugiat dignissimos ullam culpa harum adipisci aliquid, asperiores, a
-						fuga inventore reiciendis quia beatae soluta corrupti tempora
-						consequuntur sed sint.
+						Step into a world of inspiration and transformation, where every
+						drop of sweat is a step toward your goals. Our state-of-the-art
+						facilities, experienced trainers, and vibrant community are here to
+						support you on your fitness journey.
 					</p>
 					<p className='text-black/70 '>
-						Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti
-						dignissimos illo tempora quo eligendi eum, quidem repudiandae at
-						voluptatem, aliquam unde quam eaque ea labore nemo vero debitis!
-						Alias, maxime.
+						Whether you're a seasoned athlete or taking your first steps toward
+						wellness, we're dedicated to helping you achieve greatness. Get
+						ready to embrace the challenge, push your limits, and discover the
+						true potential that lies within you. Join us today and let's embark
+						on this exciting path to a better you!
 					</p>
 					<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6 mb-14 md:w-2/5 md:mt-10'>
 						Get in touch

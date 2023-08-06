@@ -4,10 +4,10 @@ export default function HeaderForm() {
 			<img src='/headerFormImg.png' alt='' className='hidden md:block' />
 			<div className='md:flex md:justify-center md:flex-col md:items-center md:w-full md:px-20'>
 				<h3 className='text-center uppercase font-bold mt-4 md:text-2xl'>
-					Free 7 days
+					Get first
 				</h3>
 				<h2 className='text-center uppercase font-bold text-3xl mt-2 mb-6 md:text-4xl md:mb-16'>
-					Online booking
+					free training
 				</h2>
 
 				<form action='' className=''>
@@ -46,7 +46,7 @@ export default function HeaderForm() {
 
 					<div className='w-full text-center mb-6 mt-10'>
 						<button className='bg-orange-400 text-white font-bold py-2 px-4 uppercase hover:bg-orange-500 transition-colors duration-300 md:px-8 md:py-3 md:mt-10'>
-							Get in touch
+							Book now
 						</button>
 					</div>
 				</form>

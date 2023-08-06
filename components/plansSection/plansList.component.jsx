@@ -20,7 +20,7 @@ export default function PlansList() {
 				img={"/image-category2.png"}
 				title={"Yoga Classes"}
 				description={
-					"What do you think about yoga? IF you have a passion for this activity, we've got a special program."
+					"What do you think about yoga? If you have a passion for this activity, we've got a special program."
 				}
 			/>
 		</div>

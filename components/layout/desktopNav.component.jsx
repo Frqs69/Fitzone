@@ -9,16 +9,16 @@ export default function DesktopNav() {
 				</p>
 				<ul className='flex text-white font-bold gap-10 text-xl'>
 					<li>
-						<a href='#'>Home</a>
+						<Link href='/'>Home</Link>
 					</li>
 					<li>
-						<a href='#plans'>Plans</a>
+						<Link href='/#plans'>Plans</Link>
 					</li>
 					<li>
-						<a href='#trainers'>Trainers</a>
+						<Link href='/#trainers'>Trainers</Link>
 					</li>
 					<li>
-						<a href='#contact'>Contact</a>
+						<Link href='/contact'>Contact</Link>
 					</li>
 				</ul>
 			</div>

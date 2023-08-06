@@ -8,10 +8,10 @@ export default function FooterSection() {
 						Fit<span className='text-orange-400'>zone</span>
 					</h2>
 					<p className='text-white/70 mb-6 md:text-lg md:mb-10'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-						quis eaque vitae ut culpa provident beatae accusantium aliquid non
-						dolorem delectus, ipsum hic obcaecati tempore iusto? Porro sint enim
-						inventore.
+						Step into a world of inspiration and transformation, where every
+						drop of sweat is a step toward your goals. Our state-of-the-art
+						facilities, experienced trainers, and vibrant community are here to
+						support you on your fitness journey.
 					</p>
 					<div className='flex items-center md:mb-10'>
 						<p className='text-white md:text-xl'>Follow us:</p>
@@ -46,7 +46,11 @@ export default function FooterSection() {
 						</ul>
 					</div>
 					<form action='' className='flex mt-6'>
-						<input type='text' className='p-1 w-3/5 text-sm md:text-lg' />
+						<input
+							type='text'
+							className='p-1 w-3/5 text-sm md:text-lg md:pl-2'
+							placeholder='Your email'
+						/>
 						<button className='bg-orange-400 w-2/5  text-white font-bold p-1 text-sm md:text-lg'>
 							Subscribe
 						</button>
@@ -57,15 +61,23 @@ export default function FooterSection() {
 					<div className='flex flex-col gap-8'>
 						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs1.png' alt='' />
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+							<p>
+								Unleash the Power of HIIT Workouts: Elevate Your Fitness Game!
+							</p>
 						</a>
 						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs2.png' alt='' />
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+							<p>
+								Mindful Muscle Recovery: The Art of Healing After Intense
+								Workouts
+							</p>
 						</a>
 						<a href='#' className='flex items-center gap-6'>
 							<img src='/footer/blogs3.png' alt='' />
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+							<p>
+								Nutrition Hacks for Peak Performance: Fueling Your Fitness
+								Ambitions
+							</p>
 						</a>
 					</div>
 				</div>
