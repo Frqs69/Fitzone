@@ -9,6 +9,7 @@ export default function LoginPage() {
 	const emailRef = useRef();
 	const passwordRef = useRef();
 	const router = useRouter();
+	const [loginErrorMessage, setLoginErrorMessage] = useState("");
 
 	const submitHandler = async (e) => {
 		e.preventDefault();
@@ -26,7 +27,14 @@ export default function LoginPage() {
 			router.replace("/dashboard/yourTraining");
 		}
 
-		console.log(result.error);
+		setLoginErrorMessage(result.error);
+	};
+
+	const handleHideError = (e) => {
+		console.log(e.target.value);
+		if (e.target.value === "") {
+			setLoginErrorMessage("");
+		}
 	};
 
 	return (
@@ -50,9 +58,12 @@ export default function LoginPage() {
 							<input
 								type='email'
 								id='email'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									loginErrorMessage && "border-red-600"
+								}`}
 								required
 								ref={emailRef}
+								onChange={(e) => handleHideError(e)}
 							/>
 						</div>
 						<div className='flex flex-col my-4'>
@@ -64,11 +75,15 @@ export default function LoginPage() {
 							<input
 								type='password'
 								id='password'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									loginErrorMessage && "border-red-600"
+								}`}
+								onChange={(e) => handleHideError(e)}
 								required
 								ref={passwordRef}
 							/>
 						</div>
+						<p className='mb-4 text-red-600 font-bold'>{loginErrorMessage}</p>
 						<div className='flex flex-col gap-4'>
 							<Link
 								href='/auth/forgotpassword'

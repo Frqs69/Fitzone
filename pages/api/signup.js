@@ -2,6 +2,12 @@ import { connectToDatabase } from "@/lib/db";
 import { hashPassword } from "@/lib/auth";
 import { signIn } from "next-auth/react";
 
+function isValidEmail(email) {
+	// Regular expression pattern for basic email validation
+	const emailPattern = /^[^\s@]+@[^\s@]+\.(com|net|org|edu|gov|io|pl)$/i;
+	return emailPattern.test(email);
+}
+
 export default async function handler(req, res) {
 	if (req.method === "POST") {
 		const data = req.body;
@@ -13,30 +19,47 @@ export default async function handler(req, res) {
 			!email ||
 			!password ||
 			!passwordConfirm ||
-			name.trim() === 0 ||
-			login.trim() === 0 ||
-			email.trim() === 0 ||
-			password.trim() === 0 ||
-			passwordConfirm.trim() === 0
+			name.trim() === "" ||
+			login.trim() === "" ||
+			email.trim() === "" ||
+			password.trim() === "" ||
+			passwordConfirm.trim() === ""
 		) {
-			res.status(422).json({ message: "Please fill all fields." });
+			res
+				.status(422)
+				.json({ message: "Please fill all fields.", wrongField: "all" });
 			return;
 		}
 
 		if (!email.includes("@")) {
-			res.status(422).json({ message: "Please provide valid email address." });
+			res.status(422).json({
+				message: "Please provide valid email address.",
+				wrongField: "email",
+			});
 			return;
 		}
 
-		if (password.trim() < 8) {
-			res
-				.status(422)
-				.json({ message: "Password must have at least 8 characters" });
+		if (!isValidEmail(email)) {
+			res.status(422).json({
+				message: "Please provide valid email address.",
+				wrongField: "email",
+			});
+			return;
+		}
+
+		if (password.trim().length < 8) {
+			res.status(422).json({
+				message: "Password must have at least 8 characters",
+				wrongField: "passwordLength",
+			});
 			return;
 		}
 
 		if (password != passwordConfirm) {
-			res.status(422).json({ message: "Passwords are not the same" });
+			res.status(422).json({
+				message: "Passwords are not the same",
+				wrongField: "password",
+			});
 			return;
 		}
 
@@ -47,7 +70,10 @@ export default async function handler(req, res) {
 		const existingUser = await db.collection("users").findOne({ email });
 
 		if (existingUser) {
-			res.status(422).json({ message: "User with this email already exist" });
+			res.status(422).json({
+				message: "User with this email already exist",
+				wrongField: "email",
+			});
 			client.close();
 			return;
 		}

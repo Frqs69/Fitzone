@@ -23,7 +23,7 @@ export const authOptions = {
 
 				if (!user) {
 					client.close();
-					throw new Error("No user found!");
+					throw new Error("No user found with this email address");
 				}
 
 				const isPasswordValid = await verifyPassword(
@@ -33,7 +33,7 @@ export const authOptions = {
 
 				if (!isPasswordValid) {
 					client.close();
-					throw new Error("Could not log you in!");
+					throw new Error("Email or password is not valid");
 				}
 
 				client.close();

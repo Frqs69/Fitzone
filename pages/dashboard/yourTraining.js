@@ -3,9 +3,8 @@ import DashboardMobileNav from "@/components/dashboard/nav/dashboardMobileNav.co
 import YourTraining from "@/components/dashboard/yourTraining/youtTraining.component";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-// import { findUser } from "@/lib/db";
-// import { authOptions } from "../api/auth/[...nextauth]";
-// import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
 
 export default function YourTrainingPage() {
 	const { data: session, status } = useSession();
@@ -43,26 +42,26 @@ export default function YourTrainingPage() {
 		<>
 			<DashboardDesktopNav />
 			<DashboardMobileNav />
-			<YourTraining user={user}/>
+			<YourTraining user={user} />
 		</>
 	);
 }
 
 //! Uncomment on end of project for prevent not logged users to view this page
-// export async function getServerSideProps(context) {
-// 	const session = await getServerSession(context.req, context.res, authOptions);
-// 	if (!session) {
-// 		return {
-// 			redirect: {
-// 				destination: `/auth/login`,
-// 				permanent: false,
-// 			},
-// 		};
-// 	}
-// 	session.user.image = null;
-// 	return {
-// 		props: {
-// 			session,
-// 		},
-// 	};
-// }
+export async function getServerSideProps(context) {
+	const session = await getServerSession(context.req, context.res, authOptions);
+	if (!session) {
+		return {
+			redirect: {
+				destination: `/`,
+				permanent: false,
+			},
+		};
+	}
+	session.user.image = null;
+	return {
+		props: {
+			session,
+		},
+	};
+}

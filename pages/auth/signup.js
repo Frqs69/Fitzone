@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { createUser } from "@/lib/createUser";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
@@ -15,6 +15,11 @@ export default function SignUpPage() {
 	const passwordRef = useRef();
 	const passwordConfirmRef = useRef();
 
+	const [errorField, setErrorField] = useState("");
+	const [errorMessage, setErrorMessage] = useState("");
+
+	console.log(errorField);
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
 
@@ -26,32 +31,41 @@ export default function SignUpPage() {
 
 		console.log(name, login, email, password, passwordConfirm);
 
-		let res;
 		try {
-			res = await createUser(name, login, email, password, passwordConfirm);
-			console.log("asd", res);
+			const res = await createUser(
+				name,
+				login,
+				email,
+				password,
+				passwordConfirm
+			);
 		} catch (err) {
-			console.log(err);
+			console.log(err.data);
+			setErrorField(err.data.wrongField);
+			setErrorMessage(err.data.message);
+			return;
 		}
 
-		try {
-			const result = await signIn("credentials", {
-				redirect: false,
-				email: email,
-				password: password,
-			});
-		} catch (err) {
-			console.log("cant log in ", err);
-		}
+		const result = await signIn("credentials", {
+			redirect: false,
+			email: email,
+			password: password,
+		});
 
-		router.replace("/dashboard/yourTraining");
+		if (!result.error) {
+			router.replace("/dashboard/yourTraining");
+		}
+	};
+
+	const handleClearError = () => {
+		setErrorField("");
 	};
 
 	return (
-		<div className="bg-[url('/headerImg.png')] bg-cover relative bg-center h-screen">
+		<div className="bg-[url('/headerImg.png')] bg-cover relative bg-center h-screen ">
 			<div className='absolute top-0 left-0 w-full h-full bg-black/40 '></div>
 			<div className='w-full h-full flex justify-center items-center relative'>
-				<div className='bg-white p-4 md:p-10 md:w-3/12'>
+				<div className='bg-white p-4  md:p-10 md:w-3/12 '>
 					<div className='uppercase font-bold text-3xl text-center mb-6 md:text-4xl md:mb-10'>
 						<Link href='/'>
 							{" "}
@@ -68,9 +82,12 @@ export default function SignUpPage() {
 							<input
 								type='text'
 								id='name'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									errorField === "all" && "border-red-600"
+								}`}
 								required
 								ref={nameRef}
+								onChange={handleClearError}
 							/>
 						</div>
 						<div className='flex flex-col my-4'>
@@ -82,9 +99,12 @@ export default function SignUpPage() {
 							<input
 								type='text'
 								id='login'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									errorField === "all" && "border-red-600"
+								}`}
 								required
 								ref={loginRef}
+								onChange={handleClearError}
 							/>
 						</div>
 						<div className='flex flex-col my-4'>
@@ -96,10 +116,18 @@ export default function SignUpPage() {
 							<input
 								type='email'
 								id='email'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									errorField === "email" && "border-red-600"
+								} ${errorField === "all" && "border-red-600"}`}
 								required
 								ref={emailRef}
+								onChange={handleClearError}
 							/>
+							{errorField === "email" && (
+								<p className='mt-4 text-red-600 font-bold text-sm'>
+									{errorMessage}
+								</p>
+							)}
 						</div>
 						<div className='flex flex-col my-4'>
 							<label
@@ -110,10 +138,20 @@ export default function SignUpPage() {
 							<input
 								type='password'
 								id='password'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									(errorField === "password" && "border-red-600") ||
+									(errorField === "passwordLength" && "border-red-600")
+								} ${errorField === "all" && "border-red-600"}`}
 								required
 								ref={passwordRef}
+								onChange={handleClearError}
 							/>
+							{errorField === "password" ||
+								(errorField === "passwordLength" && (
+									<p className='mt-4 text-red-600 font-bold text-sm'>
+										{errorMessage}
+									</p>
+								))}
 						</div>
 						<div className='flex flex-col my-6'>
 							<label
@@ -124,11 +162,24 @@ export default function SignUpPage() {
 							<input
 								type='password'
 								id='passwordRepeat'
-								className='border text-lg py-1 px-2'
+								className={`border text-lg py-1 px-2 ${
+									errorField === "password" && "border-red-600"
+								} ${errorField === "all" && "border-red-600"}`}
 								required
 								ref={passwordConfirmRef}
+								onChange={handleClearError}
 							/>
+							{errorField === "password" && (
+								<p className='mt-4 text-red-600 font-bold text-sm'>
+									{errorMessage}
+								</p>
+							)}
 						</div>
+						{errorField === "all" && (
+							<p className='mt-4 mb-4 text-red-600 font-bold'>
+								Please fill all fields
+							</p>
+						)}
 						<Link
 							href='/auth/login'
 							className='text-orange-500 text-sm font-bold'>
