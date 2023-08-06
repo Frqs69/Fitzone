@@ -69,8 +69,8 @@ export default function YourTrainingExercise({
 
 	const handleDeleteData = async (id) => {
 		// handleSaveData(id, "", "", "");
-		const res = await handleDeleteExercise(id, exerciseCollection);
 		setConfirmDeletePanel(false);
+		const res = await handleDeleteExercise(id, exerciseCollection);
 	};
 
 	const handleShowConfirmDeletePanel = () => {
@@ -97,7 +97,7 @@ export default function YourTrainingExercise({
 	};
 
 	return (
-		<div className='border p-4 mb-8 relative '>
+		<div className='border p-4 mb-8 relative md:border-4 border-black/20'>
 			{confirmDeletePanel && (
 				<div className='absolute top-0 right-0 w-full h-full flex flex-col justify-center items-center bg-white/90'>
 					<p className='font-bold text-2xl'>Delete?</p>
@@ -118,7 +118,7 @@ export default function YourTrainingExercise({
 
 			<div className='flex justify-between mb-6 mt-2'>
 				<div className='flex items-center'>
-					<p className='text-xl'>{`Exercise ${id}`}</p>
+					<p className='text-xl md:text-2xl'>{`Exercise ${id}`}</p>
 					<Icon
 						icon='entypo:trash'
 						className='ml-4 cursor-pointer text-black/30'
@@ -159,7 +159,7 @@ export default function YourTrainingExercise({
 					</button>
 				)}
 			</div>
-			<p className='text-lg mb-4 font-bold'>{name}</p>
+			<p className='text-lg mb-4 font-bold md:text-xl'>{name}</p>
 			<div>
 				{!activeEditing && weightType != "-" && (
 					<div className='grid grid-cols-4 mb-4'>

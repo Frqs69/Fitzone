@@ -15,8 +15,9 @@ export default function DashboardMobileNav() {
 	};
 
 	return (
-		<nav className='relative flex justify-between py-6 px-6 items-center md:hidden bg-black/30'>
-			<p className='uppercase font-bold text-2xl text-white'>
+		<nav className="relative flex justify-between py-6 px-6 items-center md:hidden bg-black/30 bg-[url('/headerImg.png')] bg-cover bg-center">
+			<div className='absolute top-0 left-0 w-full h-full bg-black/40'></div>
+			<p className='uppercase font-bold text-2xl text-white relative'>
 				Fit<span className='text-orange-400'>zone</span>
 			</p>
 			<Icon
@@ -24,6 +25,7 @@ export default function DashboardMobileNav() {
 				width={30}
 				color='white'
 				onClick={handleActive}
+				className='relative'
 			/>
 			<div
 				className={`fixed top-0 left-0 w-screen h-screen bg-white ${

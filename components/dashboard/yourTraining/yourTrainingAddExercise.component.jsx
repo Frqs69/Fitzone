@@ -84,7 +84,7 @@ export default function YourTrainingAddExercise({
 	return (
 		<form className='border p-4 mb-8  ' onSubmit={handleSave}>
 			<div className='flex justify-between mb-6 mt-2'>
-				<p className='text-xl'>{`Exercise ${id + 1}`}</p>
+				<p className='text-xl md:text-2xl'>{`Exercise ${id + 1}`}</p>
 				{showErrorMessage && (
 					<p className='font-bold text-2xl text-red-500 ml-10'>
 						Use only numbers

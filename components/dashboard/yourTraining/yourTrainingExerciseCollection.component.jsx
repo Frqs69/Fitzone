@@ -84,10 +84,12 @@ export default function YourTrainingExerciseCollection({
 
 	return (
 		<div className='mb-10 '>
-			<h3 className='text-xl font-bold mb-8'>{collectionTitle}</h3>
-			<div>
-				{exerciseCollectionData.length === 0 && (
-					<p className='text-center mb-8 mt-14'>{`You haven't added ${collectionTitle.toLowerCase()} exercises yet`}</p>
+			<h3 className='text-xl font-bold mb-8 md:text-3xl md:mb-12'>
+				{collectionTitle}
+			</h3>
+			<div className='md:grid md:grid-cols-3 md:gap-8'>
+				{exerciseCollectionData.length === 0 && !showAddExercisePanel && (
+					<p className='text-center mb-8 mt-14 md:flex  md:mt-0 md:items-center md:mb-0'>{`You haven't added ${collectionTitle.toLowerCase()} exercises yet`}</p>
 				)}
 				{exerciseCollectionData.map((item) => (
 					<YourTrainingExercise
@@ -102,23 +104,24 @@ export default function YourTrainingExerciseCollection({
 						exerciseCollection={exerciseCollection}
 					/>
 				))}
-			</div>
-			{showAddExercisePanel && (
-				<YourTrainingAddExercise
-					id={exerciseCollectionData.length}
-					handleShowAddExerciseForm={handleShowAddExerciseForm}
-					handleAddExercise={handleAddExercise}
-					exerciseCollection={exerciseCollection}
-				/>
-			)}
-			<div className='text-center'>
-				{!showAddExercisePanel && (
-					<button
-						className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6 '
-						onClick={handleShowAddExerciseForm}>
-						Add exercise
-					</button>
+
+				{showAddExercisePanel && (
+					<YourTrainingAddExercise
+						id={exerciseCollectionData.length}
+						handleShowAddExerciseForm={handleShowAddExerciseForm}
+						handleAddExercise={handleAddExercise}
+						exerciseCollection={exerciseCollection}
+					/>
 				)}
+				<div className='text-center md:flex md:justify-center md:items-center'>
+					{!showAddExercisePanel && (
+						<button
+							className='bg-orange-400 text-white font-bold py-2 px-4 uppercase my-6 '
+							onClick={handleShowAddExerciseForm}>
+							Add exercise
+						</button>
+					)}
+				</div>
 			</div>
 		</div>
 	);
