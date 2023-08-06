@@ -1,9 +1,9 @@
-import PlansSection from "@/components/plansSection/plansSection.component";
-import WelcomeSection from "@/components/welcomeSection/welcomeSection.component";
-import TrainersSection from "@/components/trenersSection/trainersSection.component";
+import PlansSection from "@/components/indexPage/plansSection/plansSection.component";
+import WelcomeSection from "@/components/indexPage/welcomeSection/welcomeSection.component";
+import TrainersSection from "@/components/indexPage/trenersSection/trainersSection.component";
 import FooterSection from "@/components/footer/footerSection.component";
 import BreakSection from "@/components/intersection/breakeSection.component";
-import HeroSection from "@/components/heroSection/heroSection.component";
+import HeroSection from "@/components/indexPage/heroSection/heroSection.component";
 
 export default function Home() {
 	return (

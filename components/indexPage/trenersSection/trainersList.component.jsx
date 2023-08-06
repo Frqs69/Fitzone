@@ -1,5 +1,5 @@
 import TrainersItem from "./trainersItem.component";
-import { Carousel } from "../carousel.component";
+import { Carousel } from "../../carousel.component";
 export default function TrainersList() {
 	return (
 		<div className=' md:w-full md:mb-10'>
