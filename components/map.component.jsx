@@ -11,7 +11,7 @@ const icon = L.icon({
 const Map = () => {
 	return (
 		<MapContainer
-			center={[52.22, 20.916]}
+			center={[52.212, 20.916]}
 			style={{ height: "100vh" }}
 			zoom={13}>
 			<TileLayer
@@ -19,7 +19,7 @@ const Map = () => {
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			/>
 			<Marker position={[52.233, 20.916]} icon={icon}>
-				<Popup style={{ backgroundColor: "#000" }}>
+				<Popup>
 					<div>
 						<p className='font-bold text-center text-lg'>We are here!</p>
 						<p className='text-center'>Angel St. 45</p>

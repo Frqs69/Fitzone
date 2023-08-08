@@ -1,6 +1,6 @@
 export default function Contact() {
 	return (
-		<div className='bg-white relative mx-7  md:w-3/5 md:m-auto md:min-w-[1024px]'>
+		<div className='bg-white relative mx-7  md:w-1/5 md:m-auto md:min-w-[600px]'>
 			<form action='' className='pt-8 px-6 '>
 				<div className='mb-6'>
 					<label htmlFor='name' className='text-xl font-bold '>
@@ -31,9 +31,11 @@ export default function Contact() {
 						id='message'
 						className='border-2 w-full mt-4 text-xl pl-2 py-1 h-40'></textarea>
 				</div>
-				<button className='bg-orange-400 text-white font-bold  mt-10 mb-10 py-2 px-4 w-full uppercase  md:w-2/5 md:mt-10'>
-					Send message
-				</button>
+				<div className='md:text-center'>
+					<button className='bg-orange-400 text-white font-bold  mt-10 mb-10 py-2 px-4 w-full uppercase  md:w-2/5 md:mt-10 '>
+						Send message
+					</button>
+				</div>
 			</form>
 		</div>
 	);
