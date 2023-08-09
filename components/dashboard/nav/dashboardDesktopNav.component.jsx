@@ -16,6 +16,9 @@ export default function DashboardDesktopNav() {
 					<li>
 						<Link href='/dashboard/yourTraining'>Your Training</Link>
 					</li>
+					<li>
+						<Link href='/dashboard/profile'>Profile</Link>
+					</li>
 				</ul>
 			</div>
 

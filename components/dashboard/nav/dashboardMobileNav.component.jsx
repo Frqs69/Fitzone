@@ -41,6 +41,9 @@ export default function DashboardMobileNav() {
 				<Link href='/dashboard/yourTraining' onClick={handleActive}>
 					Your Training
 				</Link>
+				<Link href='/dashboard/profile' onClick={handleActive}>
+					Profile
+				</Link>
 
 				<div className='mt-10'>
 					<Link
