@@ -61,7 +61,7 @@ export default function Contact() {
 					<input
 						type='text'
 						id='name'
-						className='border-2 w-full mt-4 text-xl pl-2 py-1'
+						className='border-2 w-full mt-4 text-xl pl-2 py-1 focus:border-orange-400  focus:outline-none'
 						ref={nameRef}
 					/>
 				</div>
@@ -72,7 +72,7 @@ export default function Contact() {
 					<input
 						type='email'
 						id='email'
-						className='border-2 w-full mt-4 text-xl pl-2 py-1'
+						className='border-2 w-full mt-4 text-xl pl-2 py-1 focus:border-orange-400  focus:outline-none'
 						ref={emailRef}
 					/>
 				</div>
@@ -83,7 +83,7 @@ export default function Contact() {
 					<textarea
 						name='message'
 						id='message'
-						className='border-2 w-full mt-4 text-xl pl-2 py-1 h-40'
+						className='border-2 w-full mt-4 text-xl pl-2 py-1 h-40 focus:border-orange-400  focus:outline-none'
 						ref={messageRef}></textarea>
 				</div>
 				<div className='md:text-center'>

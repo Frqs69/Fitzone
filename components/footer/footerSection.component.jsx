@@ -48,7 +48,7 @@ export default function FooterSection() {
 					<form action='' className='flex mt-6'>
 						<input
 							type='text'
-							className='p-1 w-3/5 text-sm md:text-lg md:pl-2'
+							className='p-1 w-3/5 text-sm md:text-lg md:pl-2 focus:border-orange-400 border-white border-2  focus:outline-none '
 							placeholder='Your email'
 						/>
 						<button className='bg-orange-400 w-2/5  text-white font-bold p-1 text-sm md:text-lg'>

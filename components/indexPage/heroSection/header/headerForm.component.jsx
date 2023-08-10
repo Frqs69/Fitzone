@@ -12,7 +12,7 @@ export default function HeaderForm() {
 
 				<form action='' className=''>
 					<div className='w-full grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-8'>
-						<select className='bg-white border-black/50 border-b px-1 py-2'>
+						<select className='bg-white border border-white border-b-black/50  px-1 py-2 focus:border-orange-400  focus:outline-none '>
 							<option value=''>1 person</option>
 							<option value=''>2 persons</option>
 							<option value=''>3 persons</option>
@@ -20,26 +20,26 @@ export default function HeaderForm() {
 						</select>
 						<input
 							type='date'
-							className='border-black/50  border-b px-1 py-2'
+							className='border-b-black/50  border border-white border-b px-1 py-2 focus:border-orange-400  focus:outline-none '
 						/>
 						<input
 							type='time'
-							className='border-black/50  border-b px-1 py-2'
+							className='border-b-black/50  border border-white border-b px-1 py-2 focus:border-orange-400  focus:outline-none'
 						/>
 
 						<input
 							type='text'
 							placeholder='Name'
-							className='border-black/50  border-b px-1 py-2'
+							className='border-b-black/50  border border-white border-b px-1 py-2 focus:border-orange-400  focus:outline-none'
 						/>
 						<input
 							type='number'
-							className='border-black/50  border-b px-1 py-2'
+							className='border-b-black/50  border border-white border-b px-1 py-2 focus:border-orange-400  focus:outline-none'
 							placeholder='Phone'
 						/>
 						<input
 							type='email'
-							className='border-black/50  border-b px-1 py-2'
+							className='border-b-black/50  border border-white border-b px-1 py-2 focus:border-orange-400  focus:outline-none'
 							placeholder='Email'
 						/>
 					</div>
