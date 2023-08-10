@@ -52,7 +52,7 @@ export default function LoginPage() {
 						<div className='flex flex-col'>
 							<label
 								htmlFor='email'
-								className='font-bold text-lg mb-2 md:text-2xl md:mb-4'>
+								className='font-bold text-lg mb-2 md:text-2xl md:mb-4 '>
 								Email
 							</label>
 							<input
@@ -60,7 +60,7 @@ export default function LoginPage() {
 								id='email'
 								className={`border text-lg py-1 px-2 ${
 									loginErrorMessage && "border-red-600"
-								}`}
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={emailRef}
 								onChange={(e) => handleHideError(e)}
@@ -77,7 +77,7 @@ export default function LoginPage() {
 								id='password'
 								className={`border text-lg py-1 px-2 ${
 									loginErrorMessage && "border-red-600"
-								}`}
+								} focus:border-orange-400  focus:outline-none`}
 								onChange={(e) => handleHideError(e)}
 								required
 								ref={passwordRef}

@@ -84,7 +84,7 @@ export default function SignUpPage() {
 								id='name'
 								className={`border text-lg py-1 px-2 ${
 									errorField === "all" && "border-red-600"
-								}`}
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={nameRef}
 								onChange={handleClearError}
@@ -101,7 +101,7 @@ export default function SignUpPage() {
 								id='login'
 								className={`border text-lg py-1 px-2 ${
 									errorField === "all" && "border-red-600"
-								}`}
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={loginRef}
 								onChange={handleClearError}
@@ -118,7 +118,9 @@ export default function SignUpPage() {
 								id='email'
 								className={`border text-lg py-1 px-2 ${
 									errorField === "email" && "border-red-600"
-								} ${errorField === "all" && "border-red-600"}`}
+								} ${
+									errorField === "all" && "border-red-600"
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={emailRef}
 								onChange={handleClearError}
@@ -141,7 +143,9 @@ export default function SignUpPage() {
 								className={`border text-lg py-1 px-2 ${
 									(errorField === "password" && "border-red-600") ||
 									(errorField === "passwordLength" && "border-red-600")
-								} ${errorField === "all" && "border-red-600"}`}
+								} ${
+									errorField === "all" && "border-red-600"
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={passwordRef}
 								onChange={handleClearError}
@@ -164,7 +168,9 @@ export default function SignUpPage() {
 								id='passwordRepeat'
 								className={`border text-lg py-1 px-2 ${
 									errorField === "password" && "border-red-600"
-								} ${errorField === "all" && "border-red-600"}`}
+								} ${
+									errorField === "all" && "border-red-600"
+								} focus:border-orange-400  focus:outline-none`}
 								required
 								ref={passwordConfirmRef}
 								onChange={handleClearError}
@@ -186,12 +192,14 @@ export default function SignUpPage() {
 							Have account? Log in
 						</Link>
 						<div className='mt-6 flex justify-between  md:mt-10'>
-							<Link href='/' className='py-2 px-4  uppercase border md:text-xl'>
+							<Link
+								href='/'
+								className='py-2 px-4  uppercase border md:text-xl hover:border-orange-400  transition-colors duration-300'>
 								Back
 							</Link>
 							<button
 								type='submit'
-								className='bg-orange-400 text-white  font-bold py-2 px-4 uppercase md:text-xl'>
+								className='bg-orange-400 text-white  font-bold py-2 px-4 uppercase md:text-xl hover:bg-orange-500 transition-colors duration-300'>
 								Sign Up
 							</button>
 						</div>
