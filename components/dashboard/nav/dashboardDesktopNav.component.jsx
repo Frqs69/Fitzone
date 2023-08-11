@@ -9,9 +9,9 @@ export default function DashboardDesktopNav() {
 	return (
 		<nav className="hidden md:flex md:relative md:justify-between p-10 bg-black/30 bg-[url('/headerImg.png')]  bg-cover">
 			<div className='flex items-center gap-10'>
-				<p className='uppercase font-bold text-3xl text-white'>
+				<Link href='/' className='uppercase font-bold text-3xl text-white'>
 					Fit<span className='text-orange-400'>zone</span>
-				</p>
+				</Link>
 				<ul className='flex text-white font-bold gap-10 text-xl'>
 					<li>
 						<Link href='/dashboard/yourTraining'>Your Training</Link>
